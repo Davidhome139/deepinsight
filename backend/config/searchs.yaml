@@ -2,7 +2,7 @@ providers:
     baidu:
         name: 百度AI搜索
         enabled: true
-        apikey: bce-v3/ALTAK-gsf3JPkD5W4N5BWZIZvAC/96d9579ea86edad7ba65c4a03612427b7f692291
+        apikey: YOUR_BAIDU_ACCESS_TOKEN
         secretkey: ""
         secretid: ""
         baseurl: https://qianfan.baidubce.com/v2/ai_search/chat/completions
@@ -107,7 +107,7 @@ providers:
     百度web_search:
         name: 百度web_search
         enabled: true
-        apikey: bce-v3/ALTAK-gsf3JPkD5W4N5BWZIZvAC/96d9579ea86edad7ba65c4a03612427b7f692291
+        apikey: YOUR_BAIDU_ACCESS_TOKEN
         secretkey: ""
         secretid: ""
         baseurl: https://qianfan.baidubce.com/v2/ai_search/web_search
