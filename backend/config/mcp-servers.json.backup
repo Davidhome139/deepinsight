@@ -1,0 +1,14 @@
+{
+  "servers": [
+    {
+      "name": "custom-filesystem",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/app/workspace"]
+    },
+    {
+      "name": "sqlite",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "/app/data.db"]
+    }
+  ]
+}

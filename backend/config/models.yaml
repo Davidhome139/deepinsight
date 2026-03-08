@@ -1,0 +1,286 @@
+providers:
+    aliyun:
+        name: 阿里云 (Qwen)
+        enabled: true
+        apikey: your-aliyun-api-key-here
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: https://dashscope.aliyuncs.com/compatible-mode/v1
+        endpoint: /chat/completions
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - qwen-plus
+            - qwen-max
+            - qwen-turbo
+            - qwen-long
+            - qwq-32b-preview
+            - qwen-coder-plus
+    baidu:
+        name: 百度文心
+        enabled: true
+        apikey: bce-v3/ALTAK-gsf3JPkD5W4N5BWZIZvAC/96d9579ea86edad7ba65c4a03612427b7f692291
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: https://qianfan.baidubce.com
+        endpoint: /v2/chat/completions
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - ernie-4.0-8k
+            - ernie-4.0-turbo-8k
+            - ernie-speed-128k
+            - ernie-speed-pro-128k
+            - ernie-lite-8k
+            - ernie-tiny-8k
+    claude:
+        name: Claude (Anthropic)
+        enabled: false
+        apikey: ""
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: ""
+        endpoint: /v1/messages
+        authtype: ""
+        tokenurl: ""
+        headers:
+            anthropic-version: "2023-06-01"
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 0
+        topp: 0
+        enablethinking: false
+        models:
+            - claude-3-5-sonnet-20241022
+            - claude-3-5-haiku-20241022
+            - claude-3-opus-20240229
+            - claude-3-sonnet-20240229
+            - claude-3-haiku-20240307
+    deepseek:
+        name: DeepSeek
+        enabled: true
+        apikey: your-deepseek-api-key-here
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: https://api.deepseek.com
+        endpoint: /chat/completions
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - deepseek-chat
+            - deepseek-reasoner
+    doubao:
+        name: 豆包 (字节跳动)
+        enabled: false
+        apikey: ""
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: ""
+        endpoint: /chat/completions
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - doubao-lite-4k
+            - doubao-lite-32k
+            - doubao-lite-128k
+            - doubao-pro-4k
+            - doubao-pro-32k
+            - doubao-pro-128k
+    minimax:
+        name: MiniMax
+        enabled: true
+        apikey: your-minimax-api-key-here
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: https://api.minimaxi.com
+        endpoint: /v1/text/chatcompletion_v2
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: true
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - M2-her
+            - MiniMax M2.5
+            - MiniMax M2.5-highspeed
+            - MiniMax M2.1
+            - MiniMax M2.1-highspeed
+            - MiniMax M2
+    moonshot:
+        name: 月之暗面 (Moonshot)
+        enabled: false
+        apikey: ""
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: ""
+        endpoint: /chat/completions
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - moonshot-v1-8k
+            - moonshot-v1-32k
+            - moonshot-v1-128k
+    openai:
+        name: OpenAI
+        enabled: false
+        apikey: ""
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: ""
+        endpoint: /chat/completions
+        authtype: ""
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 0
+        topp: 0
+        enablethinking: false
+        models:
+            - gpt-3.5-turbo
+            - gpt-4
+            - gpt-4-turbo
+            - gpt-4o
+            - gpt-4o-mini
+    tencent:
+        name: 腾讯混元 (Bearer Token)
+        enabled: true
+        apikey: your-tencent-api-key-here
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: https://api.hunyuan.cloud.tencent.com/v1
+        endpoint: /chat/completions
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 0
+        topp: 0
+        enablethinking: false
+        models:
+            - hunyuan-lite
+            - hunyuan-turbos-latest
+            - hunyuan-pro
+            - hunyuan-turbo
+    tencentcloud:
+        name: 腾讯混元 (云API签名)
+        enabled: true
+        apikey: your-api-key-here
+        secretkey: your-secret-key-here
+        secretid: your-secret-id-here
+        groupid: ""
+        baseurl: https://hunyuan.tencentcloudapi.com
+        endpoint: /v1/chat/completions
+        authtype: tc3-hmac-sha256
+        tokenurl: ""
+        headers:
+            content-type: application/json
+            x-tc-action: ChatCompletions
+            x-tc-region: ap-guangzhou
+            x-tc-version: "2023-09-01"
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - hunyuan-lite
+            - hunyuan-pro
+            - hunyuan-standard
+            - hunyuan-turbo
+    zhipu:
+        name: 智谱 AI (ChatGLM)
+        enabled: false
+        apikey: ""
+        secretkey: ""
+        secretid: ""
+        groupid: ""
+        baseurl: ""
+        endpoint: /chat/completions
+        authtype: bearer
+        tokenurl: ""
+        headers:
+            content-type: application/json
+        timeout: 60
+        stream: false
+        maxcompletiontokens: 0
+        temperature: 1
+        topp: 0.95
+        enablethinking: false
+        models:
+            - glm-4
+            - glm-4-plus
+            - glm-4-air
+            - glm-4-airx
+            - glm-4-flash
+            - glm-3-turbo
+settings:
+    defaultmodel: ""
+    timeout: 60
+    maxtokens: 0
+    temperature: 0.7
+    stream: true
+    retrytimes: 0
+    retrydelay: 0

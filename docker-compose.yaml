@@ -1,0 +1,56 @@
+services:
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/plans:/app/plans
+      - ./backend/config:/app/config
+      - ./backend/chat:/app/chat
+      - ./backend/memory:/app/memory
+    environment:
+      - DATABASE_POSTGRES_HOST=db
+      - DATABASE_REDIS_HOST=redis
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./frontend/ssl:/etc/nginx/ssl
+    depends_on:
+      - backend
+
+  db:
+    image: pgvector/pgvector:pg15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: yuanbao
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d yuanbao"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:

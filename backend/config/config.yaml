@@ -1,0 +1,30 @@
+cache:
+    ttl:
+        conversation: 300
+        session: 3600
+        user_settings: 1800
+database:
+    postgres:
+        host: db
+        port: 5432
+        user: postgres
+        password: password
+        dbname: yuanbao
+        sslmode: disable
+        maxconnections: 0
+    redis:
+        host: redis
+        port: 6379
+        password: ""
+        db: 0
+jwt:
+    secret: 3wKknT3f4H7KUrjn4W3Grn80yWxh2TUaF84DLstvlv4=
+os: windows
+server:
+    port: 8080
+    mode: debug
+    corsorigins: []
+storage:
+    uploaddir: ""
+    maxsize: 0
+    allowedtypes: []

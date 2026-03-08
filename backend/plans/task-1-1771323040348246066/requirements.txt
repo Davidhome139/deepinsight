@@ -1,0 +1,7 @@
+# Dependencies for Deepseek version checker
+# Note: Most functionality uses standard library,
+# but these are optional for enhanced features
+
+# requests>=2.31.0  # Alternative to curl for HTTP requests
+# beautifulsoup4>=4.12.0  # For HTML parsing if needed
+# lxml>=4.9.0  # Faster HTML parsing backend for BeautifulSoup

@@ -1,0 +1,123 @@
+[
+  {
+    "id": "debate-tech-ethics",
+    "name": "Tech Ethics Debate",
+    "description": "Two AIs debate on technology ethics topics",
+    "icon": "⚖️",
+    "config": {
+      "title": "AI Ethics Debate",
+      "topic": "Should AI development prioritize efficiency or safety?",
+      "global_constraint": "Keep each response under 150 words",
+      "max_rounds": 8
+    }
+  },
+  {
+    "id": "world-hot-news",
+    "name": "World Hot News",
+    "description": "Analyze and discuss current international hot news",
+    "icon": "🌍",
+    "config": {
+      "title": "International Hot News Analysis",
+      "topic": "Analyze today's world hot news and international relations dynamics",
+      "global_constraint": "Base analysis on latest search results, provide objective analysis",
+      "max_rounds": 10,
+      "agent_a": {
+        "name": "International Observer",
+        "role": "You are a senior international news analyst, skilled at analyzing international events from a geopolitical perspective.",
+        "style": {
+          "language_style": "professional",
+          "knowledge_level": "expert",
+          "tone": "Objective and in-depth"
+        },
+        "model": "deepseek-chat",
+        "temperature": 0.7,
+        "max_tokens": 300,
+        "allowed_tools": ["search/web_search"]
+      },
+      "agent_b": {
+        "name": "News Commentator",
+        "role": "You are an international news commentator, skilled at interpreting the deeper meaning behind news from multiple angles.",
+        "style": {
+          "language_style": "casual",
+          "knowledge_level": "expert",
+          "tone": "Sharp and insightful"
+        },
+        "model": "deepseek-chat",
+        "temperature": 0.8,
+        "max_tokens": 300,
+        "allowed_tools": ["search/web_search"]
+      }
+    }
+  },
+  {
+    "id": "iching-divination",
+    "name": "I Ching Wisdom",
+    "description": "Explore life wisdom based on I Ching theory",
+    "icon": "☯️",
+    "config": {
+      "title": "I Ching Wisdom Dialogue",
+      "topic": "Using the Yin-Yang and Five Elements theory of I Ching, explore life philosophy and worldly wisdom",
+      "global_constraint": "Quote classics and combine with modern life scenarios",
+      "max_rounds": 8,
+      "agent_a": {
+        "name": "I Ching Master",
+        "role": "You are a national scholar proficient in I Ching, deeply understanding the Eight Trigrams, 64 Hexagrams and their philosophical connotations.",
+        "style": {
+          "language_style": "formal",
+          "knowledge_level": "expert",
+          "tone": "Elegant and profound"
+        },
+        "model": "deepseek-chat",
+        "temperature": 0.8,
+        "max_tokens": 300,
+        "allowed_tools": []
+      },
+      "agent_b": {
+        "name": "Modern Philosopher",
+        "role": "You are a modern philosopher, skilled at combining ancient I Ching wisdom with contemporary life practice.",
+        "style": {
+          "language_style": "casual",
+          "knowledge_level": "expert",
+          "tone": "Insightful and peaceful"
+        },
+        "model": "deepseek-chat",
+        "temperature": 0.8,
+        "max_tokens": 300,
+        "allowed_tools": []
+      }
+    }
+  },
+  {
+    "id": "interview-simulation",
+    "name": "Technical Interview",
+    "description": "Simulate technical interview scenarios",
+    "icon": "👔",
+    "config": {
+      "title": "Go Language Interview",
+      "topic": "Go language backend development position interview",
+      "max_rounds": 12
+    }
+  },
+  {
+    "id": "collaborative-problem-solving",
+    "name": "Collaborative Problem Solving",
+    "description": "Two AIs collaborate to solve technical problems",
+    "icon": "🧩",
+    "config": {
+      "title": "System Design Discussion",
+      "topic": "Design a real-time message push system supporting millions of concurrent users",
+      "max_rounds": 10
+    }
+  },
+  {
+    "id": "roleplay-historical",
+    "name": "Historical Figures Dialogue",
+    "description": "Cross-temporal dialogue between historical figures",
+    "icon": "🏛️",
+    "config": {
+      "title": "Dialogue between Turing and Von Neumann",
+      "topic": "Discuss the future development of artificial intelligence",
+      "max_rounds": 8
+    }
+  }
+]

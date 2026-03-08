@@ -1,0 +1,29 @@
+# Backend Development Dockerfile
+FROM golang:1.23-alpine
+
+WORKDIR /app
+
+# Install development tools and dependencies
+RUN apk add --no-cache git curl jq python3 py3-pip ca-certificates
+
+# Install Air for hot reload
+RUN go install github.com/cosmtrek/air@latest
+
+# Install delve for debugging (optional)
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
+
+# Set Go proxy
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+
+# Copy go mod files
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy Air configuration
+COPY .air.toml ./
+
+# Expose ports
+EXPOSE 8080
+
+# Default command for hot reload
+CMD ["air", "-c", ".air.toml"]

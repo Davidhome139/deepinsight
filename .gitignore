@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+
+# Build outputs
+dist/
+build/
+*.exe
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+postgres_data/
+redis_data/
+
+# Cache
+.cache/
+*.cache
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# SSL certificates (sensitive)
+certs/
+*.pem
+*.key
+*.crt
+
+# Test coverage
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class

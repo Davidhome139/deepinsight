@@ -1,0 +1,165 @@
+servers:
+    brave-search:
+        name: Brave Search (搜索引擎)
+        enabled: false
+        type: stdio
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-brave-search'
+        env:
+            brave_api_key: ""
+        allowedpaths: []
+    code-analysis:
+        name: 代码分析
+        enabled: true
+        type: mcpservers
+        command: ""
+        args: []
+        env: {}
+        allowedpaths: []
+    context7:
+        name: Context7 (上下文管理)
+        enabled: true
+        type: mcpservers
+        command: npx
+        args:
+            - -y
+            - '@upstash/context7-mcp'
+        env: {}
+        allowedpaths: []
+    fetch:
+        name: Fetch (HTTP 请求)
+        enabled: true
+        type: mcpservers
+        command: npx
+        args:
+            - -y
+            - fetch-mcp
+        env: {}
+        allowedpaths: []
+    custom-filesystem:
+        name: Custom Filesystem (工作区)
+        enabled: true
+        type: stdio
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-filesystem'
+            - /app/workspace
+        env: {}
+        allowedpaths: []
+    filesystem:
+        name: Filesystem (文件系统)
+        enabled: true
+        type: mcpservers
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-filesystem'
+            - /app
+        env: {}
+        allowedpaths: []
+    filesystem-local:
+        name: 本地文件系统
+        enabled: true
+        type: builtin
+        command: ""
+        args: []
+        env: {}
+        allowedpaths: []
+    github:
+        name: GitHub (仓库管理)
+        enabled: false
+        type: stdio
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-github'
+        env:
+            github_personal_access_token: ""
+        allowedpaths: []
+    google-maps:
+        name: Google Maps (地图服务)
+        enabled: false
+        type: stdio
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-google-maps'
+        env:
+            google_maps_api_key: ""
+        allowedpaths: []
+    memory:
+        name: Memory (知识图谱)
+        enabled: true
+        type: mcpservers
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-memory'
+        env:
+            MEMORY_FILE_PATH: /app/memory/memory.json
+        allowedpaths: []
+    playwright:
+        name: Playwright (浏览器自动化)
+        enabled: true
+        type: mcpservers
+        command: npx
+        args:
+            - -y
+            - playwright-mcp
+        env: {}
+        allowedpaths: []
+    postgres:
+        name: PostgreSQL (数据库)
+        enabled: false
+        type: stdio
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-postgres'
+        env:
+            postgres_connection_string: ""
+        allowedpaths: []
+    puppeteer:
+        name: Puppeteer (浏览器控制)
+        enabled: true
+        type: mcpservers
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-puppeteer'
+        env: {}
+        allowedpaths: []
+    search:
+        name: 搜索
+        enabled: true
+        type: builtin
+        command: ""
+        args: []
+        env: {}
+        allowedpaths: []
+    sqlite:
+        name: SQLite (数据库)
+        enabled: true
+        type: stdio
+        command: npx
+        args:
+            - -y
+            - '@modelcontextprotocol/server-sqlite'
+            - /app/data.db
+        env: {}
+        allowedpaths: []
+    terminal:
+        name: 终端
+        enabled: true
+        type: builtin
+        command: ""
+        args: []
+        env: {}
+        allowedpaths: []
+settings:
+    autodiscover: false
+    timeout: 30
+    maxtools: 0
