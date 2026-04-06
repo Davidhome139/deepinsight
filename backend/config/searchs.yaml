@@ -2,7 +2,7 @@ providers:
     baidu:
         name: 百度AI搜索
         enabled: true
-        apikey: "bce-v3/ALTAK-neIezFzq3RnmciYPXzJJp/ec615b10f602b6258bf344ef3e376158c9f6f9bd"
+        apikey: ""
         secretkey: ""
         secretid: ""
         baseurl: https://qianfan.baidubce.com/v2/ai_search/chat/completions
