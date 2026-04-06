@@ -1,0 +1,137 @@
+- generic [ref=e3]:
+  - generic:
+    - generic [ref=e6]:
+      - link "新闻" [ref=e7] [cursor=pointer]:
+        - /url: http://news.baidu.com
+      - link "hao123" [ref=e8] [cursor=pointer]:
+        - /url: https://www.hao123.com?src=from_pc
+      - link "地图" [ref=e9] [cursor=pointer]:
+        - /url: http://map.baidu.com
+      - link "贴吧" [ref=e10] [cursor=pointer]:
+        - /url: http://tieba.baidu.com/
+      - link "视频" [ref=e11] [cursor=pointer]:
+        - /url: https://haokan.baidu.com/?sfrom=baidu-top
+      - link "图片" [ref=e12] [cursor=pointer]:
+        - /url: http://image.baidu.com/
+      - link "网盘" [ref=e13] [cursor=pointer]:
+        - /url: https://pan.baidu.com?from=1026962h
+      - link "文库" [ref=e14] [cursor=pointer]:
+        - /url: https://wenku.baidu.com/?fr=bdpcindex
+      - link [ref=e15] [cursor=pointer]:
+        - /url: https://chat.baidu.com/search?isShowHello=1&pd=csaitab&setype=csaitab&extParamsJson=%7B%22enter_type%22%3A%22home_tab%22%7D
+        - img [ref=e16]
+      - link "更多" [ref=e18] [cursor=pointer]:
+        - /url: http://www.baidu.com/more/
+    - generic [ref=e19]:
+      - generic [ref=e20] [cursor=pointer]: 设置
+      - link "登录" [ref=e21] [cursor=pointer]:
+        - /url: https://passport.baidu.com/v2/?login&tpl=mn&u=http%3A%2F%2Fwww.baidu.com%2F&sms=5
+  - generic [ref=e24]:
+    - generic [ref=e25]:
+      - img [ref=e26]
+      - generic:
+        - link "点击一下，了解更多":
+          - /url: //www.baidu.com/s?wd=%E7%99%BE%E5%BA%A6%E7%83%AD%E6%90%9C&sa=ire_dl_gh_logo_texing&rsv_dl=igh_logo_pcs
+    - generic [ref=e31]:
+      - generic [ref=e34]:
+        - textbox "珠海市委副秘书长李文基被查" [active] [ref=e36]
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - img [ref=e47] [cursor=pointer]
+            - generic [ref=e50]:
+              - img [ref=e54] [cursor=pointer]
+              - img [ref=e59] [cursor=pointer]
+          - button "百度一下" [ref=e63] [cursor=pointer]
+      - link "复杂问题就找文心助手，深入思考回答更优" [ref=e67] [cursor=pointer]:
+        - /url: https://chat.baidu.com/search?extParams=%7B%22enter_type%22%3A%22home_operate%22%7D&isShowHello=1
+        - img [ref=e68]
+        - generic [ref=e70]: 复杂问题就找文心助手，深入思考回答更优
+    - generic [ref=e71]:
+      - generic [ref=e72]:
+        - link "百度热搜":
+          - /url: https://top.baidu.com/board?platform=pc&sa=pcindex_entry
+          - generic "百度热搜" [ref=e73] [cursor=pointer]: 
+        - generic [ref=e74] [cursor=pointer]:
+          - generic [ref=e75]: 
+          - text: 换一换
+      - list:
+        - listitem [ref=e76]:
+          - link " 足迹里的政绩观" [ref=e77] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E8%B6%B3%E8%BF%B9%E9%87%8C%E7%9A%84%E6%94%BF%E7%BB%A9%E8%A7%82&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e78]: 
+            - text: 足迹里的政绩观
+        - listitem [ref=e80]:
+          - link "5 上海6只军犬退役面向社会招募领养人" [ref=e81] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E4%B8%8A%E6%B5%B76%E5%8F%AA%E5%86%9B%E7%8A%AC%E9%80%80%E5%BD%B9%E9%9D%A2%E5%90%91%E7%A4%BE%E4%BC%9A%E6%8B%9B%E5%8B%9F%E9%A2%86%E5%85%BB%E4%BA%BA&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e82]: "5"
+            - text: 上海6只军犬退役面向社会招募领养人
+        - listitem [ref=e84]:
+          - link "1 人民日报：彻查优思益一案 斩断一链" [ref=e85] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E4%BA%BA%E6%B0%91%E6%97%A5%E6%8A%A5%EF%BC%9A%E5%BD%BB%E6%9F%A5%E4%BC%98%E6%80%9D%E7%9B%8A%E4%B8%80%E6%A1%88+%E6%96%A9%E6%96%AD%E4%B8%80%E9%93%BE&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e86]: "1"
+            - text: 人民日报：彻查优思益一案 斩断一链
+          - generic [ref=e87]: 新
+        - listitem [ref=e88]:
+          - link "6 伊朗一特种部队指挥官身亡" [ref=e89] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E4%BC%8A%E6%9C%97%E4%B8%80%E7%89%B9%E7%A7%8D%E9%83%A8%E9%98%9F%E6%8C%87%E6%8C%A5%E5%AE%98%E8%BA%AB%E4%BA%A1&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e90]: "6"
+            - text: 伊朗一特种部队指挥官身亡
+        - listitem [ref=e92]:
+          - link "2 海警被走私艇冲撞牺牲 执法画面公开" [ref=e93] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E6%B5%B7%E8%AD%A6%E8%A2%AB%E8%B5%B0%E7%A7%81%E8%89%87%E5%86%B2%E6%92%9E%E7%89%BA%E7%89%B2+%E6%89%A7%E6%B3%95%E7%94%BB%E9%9D%A2%E5%85%AC%E5%BC%80&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e94]: "2"
+            - text: 海警被走私艇冲撞牺牲 执法画面公开
+          - generic [ref=e95]: 热
+        - listitem [ref=e96]:
+          - link "7 孙颖莎击败蒯曼晋级世界杯女单8强" [ref=e97] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E5%AD%99%E9%A2%96%E8%8E%8E%E5%87%BB%E8%B4%A5%E8%92%AF%E6%9B%BC%E6%99%8B%E7%BA%A7%E4%B8%96%E7%95%8C%E6%9D%AF%E5%A5%B3%E5%8D%958%E5%BC%BA&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e98]: "7"
+            - text: 孙颖莎击败蒯曼晋级世界杯女单8强
+          - generic [ref=e99]: 热
+        - listitem [ref=e100]:
+          - link "3 中国把数据中心搬进大海" [ref=e101] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E6%8A%8A%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E6%90%AC%E8%BF%9B%E5%A4%A7%E6%B5%B7&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e102]: "3"
+            - text: 中国把数据中心搬进大海
+        - listitem [ref=e104]:
+          - link "8 女子被骗10万不甘心 设局反钓骗子" [ref=e105] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E5%A5%B3%E5%AD%90%E8%A2%AB%E9%AA%9710%E4%B8%87%E4%B8%8D%E7%94%98%E5%BF%83+%E8%AE%BE%E5%B1%80%E5%8F%8D%E9%92%93%E9%AA%97%E5%AD%90&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e106]: "8"
+            - text: 女子被骗10万不甘心 设局反钓骗子
+        - listitem [ref=e108]:
+          - link "4 国务院任免国家工作人员" [ref=e109] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E5%9B%BD%E5%8A%A1%E9%99%A2%E4%BB%BB%E5%85%8D%E5%9B%BD%E5%AE%B6%E5%B7%A5%E4%BD%9C%E4%BA%BA%E5%91%98&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e110]: "4"
+            - text: 国务院任免国家工作人员
+          - generic [ref=e111]: 热
+        - listitem [ref=e112]:
+          - link "9 “吹风机养生”火了 这几类人慎用" [ref=e113] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E2%80%9C%E5%90%B9%E9%A3%8E%E6%9C%BA%E5%85%BB%E7%94%9F%E2%80%9D%E7%81%AB%E4%BA%86+%E8%BF%99%E5%87%A0%E7%B1%BB%E4%BA%BA%E6%85%8E%E7%94%A8&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e114]: "9"
+            - text: “吹风机养生”火了 这几类人慎用
+          - generic [ref=e115]: 热
+  - generic [ref=e117]:
+    - paragraph [ref=e118]:
+      - link "关于百度" [ref=e119] [cursor=pointer]:
+        - /url: //home.baidu.com
+    - paragraph [ref=e120]:
+      - link "About Baidu" [ref=e121] [cursor=pointer]:
+        - /url: http://ir.baidu.com
+    - paragraph [ref=e122]:
+      - link "使用百度前必读" [ref=e123] [cursor=pointer]:
+        - /url: //www.baidu.com/duty
+    - paragraph [ref=e124]:
+      - link "帮助中心" [ref=e125] [cursor=pointer]:
+        - /url: https://help.baidu.com/question?prod_id=1
+    - paragraph [ref=e126]:
+      - link "企业推广" [ref=e127] [cursor=pointer]:
+        - /url: https://e.baidu.com/?refer=1271
+    - paragraph [ref=e128]:
+      - link "京公网安备11000002000001号" [ref=e129] [cursor=pointer]:
+        - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001
+    - paragraph [ref=e130]:
+      - link "京ICP证030173号" [ref=e131] [cursor=pointer]:
+        - /url: https://beian.miit.gov.cn
+    - paragraph [ref=e132]: 互联网新闻信息服务许可证11220180008
+    - generic [ref=e133]: 
+    - generic [ref=e134]: 

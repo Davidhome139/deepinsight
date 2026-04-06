@@ -1,0 +1,1085 @@
+{
+  "version": "2.0",
+  "description": "Comprehensive prompt templates organized by Type → Topic → Complexity with variable support",
+  "variables": {
+    "language": {
+      "label": "Language",
+      "options": ["中文", "English", "日本語", "한국어", "Español", "Français", "Deutsch"]
+    },
+    "tone": {
+      "label": "Tone",
+      "options": ["professional", "casual", "academic", "friendly", "formal", "persuasive", "empathetic"]
+    },
+    "output_format": {
+      "label": "Output Format",
+      "options": ["markdown", "plain text", "bullet points", "numbered list", "table", "JSON", "XML"]
+    },
+    "detail_level": {
+      "label": "Detail Level",
+      "options": ["brief", "moderate", "detailed", "comprehensive", "exhaustive"]
+    }
+  },
+  "categories": [
+    {
+      "id": "coding",
+      "name": "Coding & Development",
+      "icon": "💻",
+      "topics": [
+        {
+          "id": "code_review",
+          "name": "Code Review",
+          "templates": [
+            {
+              "id": "code_review_simple",
+              "name": "Quick Review",
+              "complexity": "simple",
+              "description": "Fast code review for small changes",
+              "template": "Review the following {language} code for obvious issues:\n\n```{language}\n{code}\n```\n\nFocus on: bugs, typos, and basic improvements.",
+              "variables": ["language", "code"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "default": ""},
+                "code": {"label": "Code to Review", "type": "textarea", "required": true}
+              }
+            },
+            {
+              "id": "code_review_security",
+              "name": "Security Review",
+              "complexity": "medium",
+              "description": "Security-focused code review",
+              "template": "Perform a security-focused review of this {language} code:\n\n```{language}\n{code}\n```\n\nCheck for:\n1. **Input Validation**: SQL injection, XSS, command injection\n2. **Authentication/Authorization**: Access control issues\n3. **Data Protection**: Sensitive data exposure, encryption\n4. **Error Handling**: Information leakage in errors\n5. **Dependencies**: Known vulnerabilities\n6. **OWASP Top 10**: Any relevant vulnerabilities\n\nFor each issue found:\n- Severity (Critical/High/Medium/Low)\n- Location in code\n- Attack vector explanation\n- Remediation with code example",
+              "variables": ["language", "code"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "default": ""},
+                "code": {"label": "Code to Review", "type": "textarea", "required": true}
+              }
+            },
+            {
+              "id": "code_review_performance",
+              "name": "Performance Review",
+              "complexity": "complex",
+              "description": "Performance and optimization focused review",
+              "template": "Analyze this {language} code for performance optimization:\n\n```{language}\n{code}\n```\n\n**Context**: {context}\n**Expected load**: {load}\n\nAnalyze:\n1. **Time Complexity**: Big O analysis of algorithms\n2. **Space Complexity**: Memory usage patterns\n3. **Database**: N+1 queries, missing indexes, inefficient joins\n4. **I/O Operations**: File handling, network calls, blocking operations\n5. **Caching**: Opportunities for memoization/caching\n6. **Concurrency**: Thread safety, race conditions, deadlocks\n7. **Memory Leaks**: Resource management, garbage collection\n\nProvide:\n- Bottleneck identification with severity\n- Benchmarking suggestions\n- Optimized code alternatives\n- Trade-off analysis (readability vs performance)",
+              "variables": ["language", "code", "context", "load"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "default": ""},
+                "code": {"label": "Code to Review", "type": "textarea", "required": true},
+                "context": {"label": "Application Context", "type": "textarea", "default": ""},
+                "load": {"label": "Expected Load", "type": "text", "default": "1000 requests/sec"}
+              }
+            }
+          ]
+        },
+        {
+          "id": "debugging",
+          "name": "Debugging & Fix",
+          "templates": [
+            {
+              "id": "debug_error",
+              "name": "Error Analysis",
+              "complexity": "simple",
+              "description": "Analyze and fix an error",
+              "template": "Analyze and fix this error:\n\n**Error Message**:\n```\n{error}\n```\n\n**Code**:\n```{language}\n{code}\n```\n\nProvide:\n1. Root cause explanation\n2. Fixed code\n3. Prevention tip",
+              "variables": ["language", "error", "code"],
+              "customVariables": {
+                "language": {"label": "Language", "type": "text", "default": ""},
+                "error": {"label": "Error Message", "type": "textarea", "required": true},
+                "code": {"label": "Problematic Code", "type": "textarea", "required": true}
+              }
+            },
+            {
+              "id": "debug_systematic",
+              "name": "Systematic Debug",
+              "complexity": "complex",
+              "description": "Comprehensive debugging with hypothesis testing",
+              "template": "Help me systematically debug this issue:\n\n**Symptom**: {symptom}\n**Expected behavior**: {expected}\n**Actual behavior**: {actual}\n\n**Code**:\n```{language}\n{code}\n```\n\n**Environment**:\n- Runtime: {runtime}\n- Dependencies: {dependencies}\n- Last working state: {last_working}\n\n**What I've tried**: {attempts}\n\nApproach this like a detective:\n1. **Hypothesis Generation**: List possible causes ranked by likelihood\n2. **Evidence Gathering**: What logs/data would confirm each hypothesis?\n3. **Test Design**: Minimal reproduction steps\n4. **Root Cause Analysis**: 5 Whys technique\n5. **Solution**: Fix with explanation\n6. **Verification**: How to confirm the fix works\n7. **Prevention**: How to prevent recurrence",
+              "variables": ["symptom", "expected", "actual", "language", "code", "runtime", "dependencies", "last_working", "attempts"],
+              "customVariables": {
+                "symptom": {"label": "Problem Symptom", "type": "textarea", "required": true},
+                "expected": {"label": "Expected Behavior", "type": "textarea", "required": true},
+                "actual": {"label": "Actual Behavior", "type": "textarea", "required": true},
+                "language": {"label": "Language", "type": "text", "default": ""},
+                "code": {"label": "Relevant Code", "type": "textarea", "required": true},
+                "runtime": {"label": "Runtime Environment", "type": "text", "default": ""},
+                "dependencies": {"label": "Key Dependencies", "type": "text", "default": ""},
+                "last_working": {"label": "Last Known Working State", "type": "textarea", "default": ""},
+                "attempts": {"label": "What You've Tried", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "architecture",
+          "name": "System Architecture",
+          "templates": [
+            {
+              "id": "arch_design",
+              "name": "Architecture Design",
+              "complexity": "complex",
+              "description": "Design system architecture from requirements",
+              "template": "Design a system architecture for:\n\n**System**: {system_name}\n**Description**: {description}\n\n**Functional Requirements**:\n{functional_requirements}\n\n**Non-Functional Requirements**:\n- Expected users: {users}\n- Peak load: {load}\n- Latency requirement: {latency}\n- Availability: {availability}\n- Data volume: {data_volume}\n\n**Constraints**:\n{constraints}\n\nProvide:\n1. **High-Level Architecture**: Component diagram with responsibilities\n2. **Technology Stack**: Recommendations with justification\n3. **Data Architecture**: Storage strategy, data flow\n4. **API Design**: Key interfaces and contracts\n5. **Scalability Strategy**: How to handle growth\n6. **Security Architecture**: Authentication, authorization, data protection\n7. **Deployment Architecture**: Infrastructure, CI/CD\n8. **Trade-offs**: Decisions made and alternatives considered\n9. **Mermaid Diagram**: Visual representation",
+              "variables": ["system_name", "description", "functional_requirements", "users", "load", "latency", "availability", "data_volume", "constraints"],
+              "customVariables": {
+                "system_name": {"label": "System Name", "type": "text", "required": true},
+                "description": {"label": "System Description", "type": "textarea", "required": true},
+                "functional_requirements": {"label": "Functional Requirements", "type": "textarea", "required": true},
+                "users": {"label": "Expected Users", "type": "text", "default": "10,000 DAU"},
+                "load": {"label": "Peak Load", "type": "text", "default": "100 req/s"},
+                "latency": {"label": "Latency Requirement", "type": "text", "default": "< 200ms p99"},
+                "availability": {"label": "Availability Target", "type": "select", "options": ["99%", "99.9%", "99.99%", "99.999%"], "default": "99.9%"},
+                "data_volume": {"label": "Data Volume", "type": "text", "default": ""},
+                "constraints": {"label": "Constraints", "type": "textarea", "default": ""}
+              }
+            },
+            {
+              "id": "arch_review",
+              "name": "Architecture Review",
+              "complexity": "complex",
+              "description": "Review existing architecture",
+              "template": "Review this system architecture:\n\n**Architecture Description**:\n{architecture}\n\n**Current Challenges**:\n{challenges}\n\n**Scale**: {scale}\n\nEvaluate against:\n1. **SOLID Principles**: Single responsibility, modularity\n2. **Scalability**: Horizontal vs vertical, bottlenecks\n3. **Resilience**: Failure modes, recovery, circuit breakers\n4. **Observability**: Logging, monitoring, tracing\n5. **Security**: Attack surface, data protection\n6. **Operational Excellence**: Deployment, maintenance\n7. **Cost Efficiency**: Resource utilization\n\nFor each concern:\n- Current state assessment\n- Risk level (Critical/High/Medium/Low)\n- Recommendations with priority\n- Migration path if changes needed",
+              "variables": ["architecture", "challenges", "scale"],
+              "customVariables": {
+                "architecture": {"label": "Architecture Description", "type": "textarea", "required": true},
+                "challenges": {"label": "Current Challenges", "type": "textarea", "default": ""},
+                "scale": {"label": "Current Scale", "type": "text", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "api_design",
+          "name": "API Design",
+          "templates": [
+            {
+              "id": "api_rest",
+              "name": "REST API Design",
+              "complexity": "medium",
+              "description": "Design RESTful API endpoints",
+              "template": "Design a RESTful API for:\n\n**Resource**: {resource}\n**Use Cases**:\n{use_cases}\n\nProvide:\n1. **Endpoints**: Method, path, description\n2. **Request/Response**: JSON schemas with examples\n3. **Error Handling**: Error codes and messages\n4. **Pagination**: Strategy for list endpoints\n5. **Filtering/Sorting**: Query parameters\n6. **Versioning**: Strategy recommendation\n7. **Authentication**: Required headers\n8. **Rate Limiting**: Recommendations\n\nFollow REST best practices and use {naming_convention} naming.",
+              "variables": ["resource", "use_cases", "naming_convention"],
+              "customVariables": {
+                "resource": {"label": "Resource Name", "type": "text", "required": true},
+                "use_cases": {"label": "Use Cases", "type": "textarea", "required": true},
+                "naming_convention": {"label": "Naming Convention", "type": "select", "options": ["camelCase", "snake_case", "kebab-case"], "default": "camelCase"}
+              }
+            },
+            {
+              "id": "api_graphql",
+              "name": "GraphQL Schema",
+              "complexity": "medium",
+              "description": "Design GraphQL schema",
+              "template": "Design a GraphQL schema for:\n\n**Domain**: {domain}\n**Entities**:\n{entities}\n\n**Operations needed**:\n{operations}\n\nProvide:\n1. **Type Definitions**: Complete SDL with descriptions\n2. **Queries**: Read operations\n3. **Mutations**: Write operations\n4. **Subscriptions**: Real-time updates (if needed)\n5. **Input Types**: For mutations\n6. **Connections**: Pagination pattern\n7. **Error Handling**: Union types for errors\n8. **N+1 Prevention**: DataLoader recommendations",
+              "variables": ["domain", "entities", "operations"],
+              "customVariables": {
+                "domain": {"label": "Domain", "type": "text", "required": true},
+                "entities": {"label": "Entities", "type": "textarea", "required": true},
+                "operations": {"label": "Required Operations", "type": "textarea", "required": true}
+              }
+            }
+          ]
+        },
+        {
+          "id": "database",
+          "name": "Database Design",
+          "templates": [
+            {
+              "id": "db_schema",
+              "name": "Database Schema",
+              "complexity": "medium",
+              "description": "Design database schema",
+              "template": "Design a database schema for:\n\n**System**: {system}\n**Requirements**:\n{requirements}\n\n**Query Patterns**:\n{query_patterns}\n\n**Database Type**: {db_type}\n\nProvide:\n1. **Entity-Relationship Diagram**: Description or ASCII\n2. **Table Definitions**: With data types, constraints\n3. **Indexes**: Based on query patterns\n4. **Relationships**: Foreign keys, junction tables\n5. **Normalization**: Level and reasoning\n6. **Sample Queries**: For each query pattern\n7. **Migration Strategy**: If evolving existing schema",
+              "variables": ["system", "requirements", "query_patterns", "db_type"],
+              "customVariables": {
+                "system": {"label": "System Name", "type": "text", "required": true},
+                "requirements": {"label": "Data Requirements", "type": "textarea", "required": true},
+                "query_patterns": {"label": "Query Patterns", "type": "textarea", "required": true},
+                "db_type": {"label": "Database Type", "type": "select", "options": ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Elasticsearch", "DynamoDB"], "default": "PostgreSQL"}
+              }
+            },
+            {
+              "id": "db_query_optimize",
+              "name": "Query Optimization",
+              "complexity": "complex",
+              "description": "Optimize slow database queries",
+              "template": "Optimize this slow database query:\n\n**Query**:\n```sql\n{query}\n```\n\n**Execution Plan**:\n```\n{explain_plan}\n```\n\n**Table Info**:\n{table_info}\n\n**Current Performance**: {current_perf}\n**Target Performance**: {target_perf}\n\nAnalyze:\n1. **Execution Plan Analysis**: Identify bottlenecks\n2. **Index Recommendations**: What indexes to add/modify\n3. **Query Rewrite**: Optimized query version\n4. **Schema Changes**: If beneficial\n5. **Caching Strategy**: If applicable\n6. **Expected Improvement**: Estimated gains",
+              "variables": ["query", "explain_plan", "table_info", "current_perf", "target_perf"],
+              "customVariables": {
+                "query": {"label": "SQL Query", "type": "textarea", "required": true},
+                "explain_plan": {"label": "EXPLAIN Output", "type": "textarea", "default": ""},
+                "table_info": {"label": "Table Information", "type": "textarea", "default": ""},
+                "current_perf": {"label": "Current Performance", "type": "text", "default": ""},
+                "target_perf": {"label": "Target Performance", "type": "text", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "testing",
+          "name": "Testing",
+          "templates": [
+            {
+              "id": "test_unit",
+              "name": "Unit Test Generation",
+              "complexity": "medium",
+              "description": "Generate comprehensive unit tests",
+              "template": "Generate unit tests for this {language} code:\n\n```{language}\n{code}\n```\n\n**Testing Framework**: {framework}\n\nInclude tests for:\n1. **Happy Path**: Normal operation\n2. **Edge Cases**: Boundaries, empty inputs, max values\n3. **Error Cases**: Invalid inputs, exceptions\n4. **Null/Undefined**: Null handling\n5. **Type Coercion**: If applicable\n\nFor each test:\n- Descriptive name (Given-When-Then or should pattern)\n- Arrange-Act-Assert structure\n- Mock setup if needed\n- Clear assertions",
+              "variables": ["language", "code", "framework"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "required": true},
+                "code": {"label": "Code to Test", "type": "textarea", "required": true},
+                "framework": {"label": "Testing Framework", "type": "text", "default": ""}
+              }
+            },
+            {
+              "id": "test_cases",
+              "name": "Test Case Design",
+              "complexity": "complex",
+              "description": "Design comprehensive test cases",
+              "template": "Design test cases for:\n\n**Feature**: {feature}\n**Requirements**:\n{requirements}\n\n**User Flows**:\n{user_flows}\n\nCreate test cases covering:\n1. **Functional Tests**: All requirements\n2. **Integration Tests**: Component interactions\n3. **Boundary Tests**: Edge cases\n4. **Negative Tests**: Error handling\n5. **Performance Tests**: If applicable\n6. **Security Tests**: Relevant vulnerabilities\n7. **Accessibility Tests**: If UI involved\n\nFormat each test case with:\n- ID, Title, Priority\n- Preconditions\n- Steps\n- Expected Results\n- Test Data needed",
+              "variables": ["feature", "requirements", "user_flows"],
+              "customVariables": {
+                "feature": {"label": "Feature Name", "type": "text", "required": true},
+                "requirements": {"label": "Requirements", "type": "textarea", "required": true},
+                "user_flows": {"label": "User Flows", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "refactoring",
+          "name": "Refactoring",
+          "templates": [
+            {
+              "id": "refactor_code",
+              "name": "Code Refactoring",
+              "complexity": "medium",
+              "description": "Refactor code for better quality",
+              "template": "Refactor this {language} code:\n\n```{language}\n{code}\n```\n\n**Focus**: {focus}\n\nApply these principles:\n- DRY (Don't Repeat Yourself)\n- SOLID principles\n- Clean Code practices\n- {language} idioms and best practices\n\nProvide:\n1. Refactored code with comments explaining changes\n2. Before/after comparison\n3. Benefits of each change\n4. Any breaking changes to note",
+              "variables": ["language", "code", "focus"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "required": true},
+                "code": {"label": "Code to Refactor", "type": "textarea", "required": true},
+                "focus": {"label": "Refactoring Focus", "type": "select", "options": ["readability", "performance", "maintainability", "testability", "all"], "default": "all"}
+              }
+            },
+            {
+              "id": "refactor_legacy",
+              "name": "Legacy Code Modernization",
+              "complexity": "complex",
+              "description": "Modernize legacy code safely",
+              "template": "Help modernize this legacy {language} code:\n\n```{language}\n{code}\n```\n\n**Current Issues**:\n{issues}\n\n**Target Modern Stack/Patterns**:\n{target}\n\n**Constraints**:\n- Must maintain backward compatibility: {backward_compat}\n- Test coverage: {test_coverage}\n\nProvide:\n1. **Assessment**: Current state analysis\n2. **Risk Analysis**: What could break?\n3. **Phased Approach**: Step-by-step modernization plan\n4. **Code Changes**: For each phase with explanations\n5. **Testing Strategy**: How to verify each change\n6. **Rollback Plan**: If something goes wrong",
+              "variables": ["language", "code", "issues", "target", "backward_compat", "test_coverage"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "required": true},
+                "code": {"label": "Legacy Code", "type": "textarea", "required": true},
+                "issues": {"label": "Current Issues", "type": "textarea", "default": ""},
+                "target": {"label": "Target Patterns/Stack", "type": "textarea", "default": ""},
+                "backward_compat": {"label": "Backward Compatibility", "type": "select", "options": ["Required", "Preferred", "Not Required"], "default": "Required"},
+                "test_coverage": {"label": "Current Test Coverage", "type": "select", "options": ["None", "Low (<30%)", "Medium (30-70%)", "High (>70%)"], "default": "Low (<30%)"}
+              }
+            }
+          ]
+        },
+        {
+          "id": "explain",
+          "name": "Code Explanation",
+          "templates": [
+            {
+              "id": "explain_code",
+              "name": "Explain Code",
+              "complexity": "simple",
+              "description": "Explain what code does",
+              "template": "Explain this {language} code in {explanation_level} terms:\n\n```{language}\n{code}\n```\n\nInclude:\n1. Overall purpose\n2. Step-by-step walkthrough\n3. Key concepts used\n4. Any potential issues",
+              "variables": ["language", "code", "explanation_level"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "default": ""},
+                "code": {"label": "Code to Explain", "type": "textarea", "required": true},
+                "explanation_level": {"label": "Explanation Level", "type": "select", "options": ["beginner", "intermediate", "advanced"], "default": "intermediate"}
+              }
+            },
+            {
+              "id": "explain_algorithm",
+              "name": "Algorithm Explanation",
+              "complexity": "medium",
+              "description": "Detailed algorithm explanation",
+              "template": "Explain this algorithm:\n\n```{language}\n{code}\n```\n\nProvide:\n1. **Algorithm Name**: What algorithm is this?\n2. **Purpose**: What problem does it solve?\n3. **How It Works**: Step-by-step with visual representation\n4. **Time Complexity**: Big O analysis with explanation\n5. **Space Complexity**: Memory usage analysis\n6. **Use Cases**: When to use this algorithm\n7. **Alternatives**: Other algorithms that solve the same problem\n8. **Trace Through**: Walk through with example input {example_input}",
+              "variables": ["language", "code", "example_input"],
+              "customVariables": {
+                "language": {"label": "Programming Language", "type": "text", "default": ""},
+                "code": {"label": "Algorithm Code", "type": "textarea", "required": true},
+                "example_input": {"label": "Example Input", "type": "text", "default": ""}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing & Content",
+      "icon": "✍️",
+      "topics": [
+        {
+          "id": "technical_writing",
+          "name": "Technical Writing",
+          "templates": [
+            {
+              "id": "doc_api",
+              "name": "API Documentation",
+              "complexity": "medium",
+              "description": "Generate API documentation",
+              "template": "Generate API documentation for:\n\n**Endpoint**: {endpoint}\n**Method**: {method}\n\n**Code**:\n```{language}\n{code}\n```\n\nInclude:\n1. **Description**: What this endpoint does\n2. **Authentication**: Required auth method\n3. **Request**: Headers, parameters, body schema\n4. **Response**: Success and error schemas\n5. **Examples**: curl and code examples in {example_language}\n6. **Rate Limits**: If applicable\n7. **Changelog**: Version history",
+              "variables": ["endpoint", "method", "language", "code", "example_language"],
+              "customVariables": {
+                "endpoint": {"label": "Endpoint Path", "type": "text", "required": true},
+                "method": {"label": "HTTP Method", "type": "select", "options": ["GET", "POST", "PUT", "PATCH", "DELETE"], "default": "GET"},
+                "language": {"label": "Backend Language", "type": "text", "default": ""},
+                "code": {"label": "Handler Code", "type": "textarea", "required": true},
+                "example_language": {"label": "Example Code Language", "type": "select", "options": ["JavaScript", "Python", "Go", "Java", "cURL"], "default": "JavaScript"}
+              }
+            },
+            {
+              "id": "doc_readme",
+              "name": "README Generator",
+              "complexity": "medium",
+              "description": "Generate comprehensive README",
+              "template": "Generate a README.md for:\n\n**Project Name**: {project_name}\n**Description**: {description}\n**Tech Stack**: {tech_stack}\n**Key Features**:\n{features}\n\nInclude sections:\n1. **Header**: Logo placeholder, badges\n2. **Overview**: What and why\n3. **Features**: Key capabilities\n4. **Quick Start**: 5-minute setup\n5. **Installation**: Detailed steps\n6. **Usage**: Code examples\n7. **Configuration**: Environment variables, options\n8. **API Reference**: If applicable\n9. **Contributing**: Guidelines\n10. **License**: {license}\n\nMake it visually appealing with emojis and clear formatting.",
+              "variables": ["project_name", "description", "tech_stack", "features", "license"],
+              "customVariables": {
+                "project_name": {"label": "Project Name", "type": "text", "required": true},
+                "description": {"label": "Project Description", "type": "textarea", "required": true},
+                "tech_stack": {"label": "Tech Stack", "type": "text", "default": ""},
+                "features": {"label": "Key Features", "type": "textarea", "required": true},
+                "license": {"label": "License", "type": "select", "options": ["MIT", "Apache-2.0", "GPL-3.0", "BSD-3-Clause", "ISC"], "default": "MIT"}
+              }
+            },
+            {
+              "id": "doc_architecture",
+              "name": "Architecture Document",
+              "complexity": "complex",
+              "description": "Create architecture decision record",
+              "template": "Create an Architecture Decision Record (ADR):\n\n**Title**: {title}\n**Context**: {context}\n**Options Considered**:\n{options}\n\n**Decision Factors**:\n{factors}\n\nFormat as ADR with:\n1. **Status**: Proposed/Accepted/Deprecated/Superseded\n2. **Context**: Background and problem statement\n3. **Decision**: The choice made\n4. **Options Considered**: Detailed analysis of each option\n5. **Consequences**: Positive and negative outcomes\n6. **Compliance**: How to verify adherence\n7. **Notes**: Additional context, links",
+              "variables": ["title", "context", "options", "factors"],
+              "customVariables": {
+                "title": {"label": "Decision Title", "type": "text", "required": true},
+                "context": {"label": "Context/Problem", "type": "textarea", "required": true},
+                "options": {"label": "Options Considered", "type": "textarea", "required": true},
+                "factors": {"label": "Decision Factors", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "content_creation",
+          "name": "Content Creation",
+          "templates": [
+            {
+              "id": "blog_technical",
+              "name": "Technical Blog Post",
+              "complexity": "complex",
+              "description": "Write in-depth technical blog",
+              "template": "Write a technical blog post:\n\n**Topic**: {topic}\n**Target Audience**: {audience}\n**Key Takeaways**:\n{takeaways}\n\n**Outline**:\n{outline}\n\nRequirements:\n- Hook readers in first paragraph\n- Include code examples with explanations\n- Add diagrams/visual descriptions where helpful\n- Practical, actionable advice\n- Length: {length} words\n- Tone: {tone}\n- Include TL;DR at the start\n- End with call-to-action\n\nOptimize for:\n- Readability (short paragraphs, clear headings)\n- SEO (natural keyword usage for: {keywords})\n- Shareability (quotable insights)",
+              "variables": ["topic", "audience", "takeaways", "outline", "length", "tone", "keywords"],
+              "customVariables": {
+                "topic": {"label": "Topic", "type": "text", "required": true},
+                "audience": {"label": "Target Audience", "type": "select", "options": ["beginner developers", "senior developers", "tech leads", "CTOs", "general tech audience"], "default": "senior developers"},
+                "takeaways": {"label": "Key Takeaways", "type": "textarea", "required": true},
+                "outline": {"label": "Outline (optional)", "type": "textarea", "default": ""},
+                "length": {"label": "Word Count", "type": "select", "options": ["1500", "2000", "2500", "3000"], "default": "2000"},
+                "keywords": {"label": "SEO Keywords", "type": "text", "default": ""}
+              }
+            },
+            {
+              "id": "tutorial",
+              "name": "Tutorial Writing",
+              "complexity": "complex",
+              "description": "Create step-by-step tutorial",
+              "template": "Create a comprehensive tutorial:\n\n**Topic**: {topic}\n**Goal**: By the end, readers will be able to: {goal}\n**Prerequisites**: {prerequisites}\n**Difficulty**: {difficulty}\n**Estimated Time**: {time}\n\nStructure:\n1. **Introduction**: What and why, what they'll build\n2. **Setup**: Environment, dependencies, starter code\n3. **Step-by-Step Instructions**: Numbered, clear steps\n4. **Code Blocks**: Complete, runnable code at each step\n5. **Checkpoints**: How to verify each step worked\n6. **Troubleshooting**: Common issues and solutions\n7. **Next Steps**: Where to go from here\n\nStyle:\n- Second person (\"you will...\")\n- Action-oriented language\n- Screenshots/diagram descriptions where helpful\n- Complete code (no \"...\"), reader should never be stuck",
+              "variables": ["topic", "goal", "prerequisites", "difficulty", "time"],
+              "customVariables": {
+                "topic": {"label": "Tutorial Topic", "type": "text", "required": true},
+                "goal": {"label": "Learning Goal", "type": "textarea", "required": true},
+                "prerequisites": {"label": "Prerequisites", "type": "textarea", "default": ""},
+                "difficulty": {"label": "Difficulty Level", "type": "select", "options": ["Beginner", "Intermediate", "Advanced"], "default": "Intermediate"},
+                "time": {"label": "Estimated Time", "type": "select", "options": ["15 minutes", "30 minutes", "1 hour", "2 hours"], "default": "30 minutes"}
+              }
+            },
+            {
+              "id": "social_media",
+              "name": "Social Media Content",
+              "complexity": "simple",
+              "description": "Create engaging social posts",
+              "template": "Create social media content for:\n\n**Topic/Announcement**: {topic}\n**Platform**: {platform}\n**Goal**: {goal}\n**Key Message**: {message}\n\nGenerate:\n1. Main post (optimized for {platform})\n2. 3 alternative versions with different angles\n3. Relevant hashtags\n4. Best posting time suggestion\n5. Engagement prompt (question or CTA)\n\nTone: {tone}\nInclude emoji: {emoji}",
+              "variables": ["topic", "platform", "goal", "message", "tone", "emoji"],
+              "customVariables": {
+                "topic": {"label": "Topic/Announcement", "type": "textarea", "required": true},
+                "platform": {"label": "Platform", "type": "select", "options": ["Twitter/X", "LinkedIn", "Facebook", "Instagram", "All"], "default": "LinkedIn"},
+                "goal": {"label": "Goal", "type": "select", "options": ["awareness", "engagement", "traffic", "leads"], "default": "engagement"},
+                "message": {"label": "Key Message", "type": "textarea", "default": ""},
+                "emoji": {"label": "Include Emoji", "type": "select", "options": ["Yes", "Minimal", "No"], "default": "Yes"}
+              }
+            }
+          ]
+        },
+        {
+          "id": "copywriting",
+          "name": "Copywriting",
+          "templates": [
+            {
+              "id": "copy_landing",
+              "name": "Landing Page Copy",
+              "complexity": "complex",
+              "description": "Write converting landing page",
+              "template": "Write landing page copy for:\n\n**Product/Service**: {product}\n**Target Audience**: {audience}\n**Main Pain Point**: {pain_point}\n**Unique Value Proposition**: {uvp}\n**Key Benefits**:\n{benefits}\n\n**Competitors**: {competitors}\n\nCreate:\n1. **Hero Section**: Headline (5-10 words), Subheadline, CTA\n2. **Problem Section**: Agitate the pain point\n3. **Solution Section**: How product solves it\n4. **Benefits Section**: Feature → Benefit format\n5. **Social Proof**: Testimonial placeholders, stats\n6. **FAQ Section**: 5 common objections as questions\n7. **Final CTA Section**: Strong close\n\nUse {framework} copywriting framework.\nTone: {tone}",
+              "variables": ["product", "audience", "pain_point", "uvp", "benefits", "competitors", "framework", "tone"],
+              "customVariables": {
+                "product": {"label": "Product/Service", "type": "text", "required": true},
+                "audience": {"label": "Target Audience", "type": "textarea", "required": true},
+                "pain_point": {"label": "Main Pain Point", "type": "textarea", "required": true},
+                "uvp": {"label": "Unique Value Proposition", "type": "textarea", "required": true},
+                "benefits": {"label": "Key Benefits", "type": "textarea", "required": true},
+                "competitors": {"label": "Competitors", "type": "text", "default": ""},
+                "framework": {"label": "Copywriting Framework", "type": "select", "options": ["AIDA", "PAS", "BAB", "4Ps", "StoryBrand"], "default": "PAS"}
+              }
+            },
+            {
+              "id": "copy_email_sequence",
+              "name": "Email Sequence",
+              "complexity": "complex",
+              "description": "Write email marketing sequence",
+              "template": "Create an email sequence:\n\n**Purpose**: {purpose}\n**Product/Offer**: {product}\n**Target Audience**: {audience}\n**Sequence Length**: {length} emails\n\n**Customer Journey Stage**: {stage}\n**Desired Action**: {action}\n\nFor each email provide:\n1. **Subject Line**: + 2 alternatives for A/B testing\n2. **Preview Text**: First 90 characters\n3. **Email Body**: Following {framework} structure\n4. **CTA**: Clear call to action\n5. **Send Timing**: When to send relative to trigger\n\nOverall sequence strategy:\n- Email 1: {email_1_purpose}\n- Progressive disclosure of value\n- Building urgency appropriately\n- Clear unsubscribe option\n\nTone: {tone}",
+              "variables": ["purpose", "product", "audience", "length", "stage", "action", "framework", "email_1_purpose", "tone"],
+              "customVariables": {
+                "purpose": {"label": "Sequence Purpose", "type": "select", "options": ["Welcome series", "Product launch", "Abandoned cart", "Re-engagement", "Onboarding", "Nurture"], "default": "Welcome series"},
+                "product": {"label": "Product/Offer", "type": "textarea", "required": true},
+                "audience": {"label": "Target Audience", "type": "textarea", "required": true},
+                "length": {"label": "Number of Emails", "type": "select", "options": ["3", "5", "7", "10"], "default": "5"},
+                "stage": {"label": "Customer Stage", "type": "select", "options": ["Awareness", "Consideration", "Decision", "Retention"], "default": "Awareness"},
+                "action": {"label": "Desired Action", "type": "text", "default": ""},
+                "framework": {"label": "Email Framework", "type": "select", "options": ["AIDA", "PAS", "BAB", "Storytelling"], "default": "PAS"},
+                "email_1_purpose": {"label": "First Email Purpose", "type": "text", "default": "Welcome and deliver promised value"}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "analysis",
+      "name": "Analysis & Research",
+      "icon": "🔍",
+      "topics": [
+        {
+          "id": "data_analysis",
+          "name": "Data Analysis",
+          "templates": [
+            {
+              "id": "data_interpret",
+              "name": "Data Interpretation",
+              "complexity": "medium",
+              "description": "Interpret data and extract insights",
+              "template": "Analyze and interpret this data:\n\n{data}\n\n**Context**: {context}\n**Questions to Answer**:\n{questions}\n\nProvide:\n1. **Summary Statistics**: Key metrics\n2. **Patterns & Trends**: What the data shows\n3. **Anomalies**: Outliers or unexpected findings\n4. **Insights**: Actionable conclusions\n5. **Limitations**: Data quality issues, biases\n6. **Recommendations**: Based on findings\n\nVisualization suggestions for each insight.",
+              "variables": ["data", "context", "questions"],
+              "customVariables": {
+                "data": {"label": "Data", "type": "textarea", "required": true},
+                "context": {"label": "Business Context", "type": "textarea", "default": ""},
+                "questions": {"label": "Questions to Answer", "type": "textarea", "default": ""}
+              }
+            },
+            {
+              "id": "data_sql",
+              "name": "SQL Query Generation",
+              "complexity": "medium",
+              "description": "Generate SQL from natural language",
+              "template": "Generate SQL query for:\n\n**Request**: {request}\n\n**Database Schema**:\n```sql\n{schema}\n```\n\n**Database**: {database}\n\nProvide:\n1. **SQL Query**: Optimized, readable\n2. **Explanation**: What each part does\n3. **Performance Notes**: Index usage, optimization tips\n4. **Alternative Approaches**: If applicable\n5. **Sample Output**: What results would look like",
+              "variables": ["request", "schema", "database"],
+              "customVariables": {
+                "request": {"label": "What data do you need?", "type": "textarea", "required": true},
+                "schema": {"label": "Database Schema", "type": "textarea", "required": true},
+                "database": {"label": "Database Type", "type": "select", "options": ["PostgreSQL", "MySQL", "SQLite", "SQL Server", "Oracle"], "default": "PostgreSQL"}
+              }
+            }
+          ]
+        },
+        {
+          "id": "market_analysis",
+          "name": "Market Analysis",
+          "templates": [
+            {
+              "id": "market_research",
+              "name": "Market Research",
+              "complexity": "complex",
+              "description": "Comprehensive market analysis",
+              "template": "Conduct market research for:\n\n**Product/Industry**: {product}\n**Target Market**: {market}\n**Geographic Focus**: {geography}\n\nAnalyze:\n1. **Market Size**: TAM, SAM, SOM with methodology\n2. **Market Trends**: Current and emerging\n3. **Customer Segments**: Demographics, psychographics, needs\n4. **Competitive Landscape**: Key players, market share\n5. **Entry Barriers**: Technical, regulatory, capital\n6. **Opportunities**: Gaps in the market\n7. **Threats**: Risks and challenges\n8. **Regulatory Environment**: Relevant regulations\n\nProvide data sources and confidence levels for estimates.",
+              "variables": ["product", "market", "geography"],
+              "customVariables": {
+                "product": {"label": "Product/Industry", "type": "text", "required": true},
+                "market": {"label": "Target Market", "type": "textarea", "required": true},
+                "geography": {"label": "Geographic Focus", "type": "text", "default": "Global"}
+              }
+            },
+            {
+              "id": "competitive_analysis",
+              "name": "Competitive Analysis",
+              "complexity": "complex",
+              "description": "Deep competitor analysis",
+              "template": "Analyze competitors for:\n\n**Your Product**: {your_product}\n**Competitors**: {competitors}\n**Analysis Focus**: {focus}\n\nFor each competitor analyze:\n1. **Overview**: Company, funding, size, history\n2. **Product**: Features, pricing, positioning\n3. **Strengths**: What they do well\n4. **Weaknesses**: Gaps and problems\n5. **Strategy**: Go-to-market, growth strategy\n6. **Customer Perception**: Reviews, NPS if available\n7. **Differentiation**: How they position vs others\n\nThen provide:\n- **Comparison Matrix**: Feature-by-feature\n- **Positioning Map**: Visual market positioning\n- **Competitive Advantages**: Your potential differentiators\n- **Threats to Monitor**: What to watch\n- **Strategic Recommendations**: How to compete",
+              "variables": ["your_product", "competitors", "focus"],
+              "customVariables": {
+                "your_product": {"label": "Your Product", "type": "textarea", "required": true},
+                "competitors": {"label": "Competitors (comma separated)", "type": "textarea", "required": true},
+                "focus": {"label": "Analysis Focus", "type": "select", "options": ["Product features", "Pricing", "Marketing", "Technology", "All"], "default": "All"}
+              }
+            }
+          ]
+        },
+        {
+          "id": "problem_solving",
+          "name": "Problem Solving",
+          "templates": [
+            {
+              "id": "root_cause",
+              "name": "Root Cause Analysis",
+              "complexity": "complex",
+              "description": "Systematic problem investigation",
+              "template": "Perform root cause analysis:\n\n**Problem**: {problem}\n**Impact**: {impact}\n**When it started**: {when}\n**Who is affected**: {who}\n\n**What we know**:\n{known_facts}\n\n**What changed recently**:\n{changes}\n\nApply these methods:\n1. **5 Whys**: Drill down to root cause\n2. **Fishbone Diagram**: Categorize potential causes\n   - People\n   - Process\n   - Technology\n   - Environment\n3. **Fault Tree Analysis**: If applicable\n\nProvide:\n- Most likely root causes (ranked)\n- Evidence supporting each\n- Recommended investigations to confirm\n- Immediate actions to mitigate\n- Long-term fixes\n- Prevention measures",
+              "variables": ["problem", "impact", "when", "who", "known_facts", "changes"],
+              "customVariables": {
+                "problem": {"label": "Problem Description", "type": "textarea", "required": true},
+                "impact": {"label": "Business Impact", "type": "textarea", "required": true},
+                "when": {"label": "When It Started", "type": "text", "default": ""},
+                "who": {"label": "Who Is Affected", "type": "text", "default": ""},
+                "known_facts": {"label": "Known Facts", "type": "textarea", "default": ""},
+                "changes": {"label": "Recent Changes", "type": "textarea", "default": ""}
+              }
+            },
+            {
+              "id": "decision_framework",
+              "name": "Decision Framework",
+              "complexity": "complex",
+              "description": "Structured decision making",
+              "template": "Help me make this decision:\n\n**Decision**: {decision}\n**Context**: {context}\n**Deadline**: {deadline}\n**Stakeholders**: {stakeholders}\n\n**Options**:\n{options}\n\n**Criteria Important to Me**:\n{criteria}\n\n**Constraints**:\n{constraints}\n\nAnalyze using:\n1. **Options Analysis**: Pros/cons of each\n2. **Weighted Decision Matrix**: Score options against criteria\n3. **Risk Assessment**: What could go wrong with each?\n4. **Second-Order Thinking**: Long-term consequences\n5. **Reversibility**: Can we undo this decision?\n6. **Regret Minimization**: Which choice minimizes future regret?\n\nProvide:\n- Recommended decision with confidence level\n- Key factors driving recommendation\n- Dissenting view (strongest argument against)\n- Implementation considerations\n- Decision triggers for revisiting",
+              "variables": ["decision", "context", "deadline", "stakeholders", "options", "criteria", "constraints"],
+              "customVariables": {
+                "decision": {"label": "Decision to Make", "type": "textarea", "required": true},
+                "context": {"label": "Context/Background", "type": "textarea", "required": true},
+                "deadline": {"label": "Decision Deadline", "type": "text", "default": ""},
+                "stakeholders": {"label": "Key Stakeholders", "type": "text", "default": ""},
+                "options": {"label": "Options (one per line)", "type": "textarea", "required": true},
+                "criteria": {"label": "Important Criteria", "type": "textarea", "default": ""},
+                "constraints": {"label": "Constraints", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "business",
+      "name": "Business & Strategy",
+      "icon": "📊",
+      "topics": [
+        {
+          "id": "product",
+          "name": "Product Management",
+          "templates": [
+            {
+              "id": "prd",
+              "name": "Product Requirements Document",
+              "complexity": "complex",
+              "description": "Create comprehensive PRD",
+              "template": "Create a Product Requirements Document:\n\n**Product**: {product}\n**Feature**: {feature}\n**Target Users**: {users}\n\n**Problem Statement**:\n{problem}\n\n**Proposed Solution**:\n{solution}\n\nGenerate PRD with:\n1. **Overview**: Executive summary\n2. **Problem & Opportunity**: User pain points, market opportunity\n3. **Goals & Success Metrics**: OKRs, KPIs\n4. **User Stories**: As a [user], I want to [action] so that [benefit]\n5. **Requirements**:\n   - Functional (P0, P1, P2 prioritized)\n   - Non-functional (performance, security, scalability)\n6. **User Flows**: Key journeys\n7. **Wireframes**: Descriptions of key screens\n8. **Technical Considerations**: Dependencies, constraints\n9. **Timeline & Milestones**: Phases\n10. **Risks & Mitigations**: Known risks\n11. **Open Questions**: To be resolved",
+              "variables": ["product", "feature", "users", "problem", "solution"],
+              "customVariables": {
+                "product": {"label": "Product Name", "type": "text", "required": true},
+                "feature": {"label": "Feature Name", "type": "text", "required": true},
+                "users": {"label": "Target Users", "type": "textarea", "required": true},
+                "problem": {"label": "Problem Statement", "type": "textarea", "required": true},
+                "solution": {"label": "Proposed Solution", "type": "textarea", "required": true}
+              }
+            },
+            {
+              "id": "user_stories",
+              "name": "User Story Generator",
+              "complexity": "medium",
+              "description": "Generate user stories with acceptance criteria",
+              "template": "Generate user stories for:\n\n**Feature**: {feature}\n**User Personas**:\n{personas}\n\n**Functionality Needed**:\n{functionality}\n\nFor each user story provide:\n1. **Story**: As a [persona], I want to [action] so that [benefit]\n2. **Acceptance Criteria**: Given-When-Then format\n3. **Priority**: MoSCoW (Must/Should/Could/Won't)\n4. **Story Points**: Estimate (1, 2, 3, 5, 8, 13)\n5. **Dependencies**: Other stories or systems\n6. **Edge Cases**: Things to consider\n\nGroup stories into {epic_count} epics.",
+              "variables": ["feature", "personas", "functionality", "epic_count"],
+              "customVariables": {
+                "feature": {"label": "Feature Description", "type": "textarea", "required": true},
+                "personas": {"label": "User Personas", "type": "textarea", "required": true},
+                "functionality": {"label": "Required Functionality", "type": "textarea", "required": true},
+                "epic_count": {"label": "Number of Epics", "type": "select", "options": ["1", "2", "3", "4", "5"], "default": "2"}
+              }
+            }
+          ]
+        },
+        {
+          "id": "strategy",
+          "name": "Strategy & Planning",
+          "templates": [
+            {
+              "id": "okr",
+              "name": "OKR Development",
+              "complexity": "medium",
+              "description": "Create objectives and key results",
+              "template": "Develop OKRs for:\n\n**Context**: {context}\n**Time Period**: {period}\n**Focus Area**: {focus}\n**Current State**: {current_state}\n**Desired Outcome**: {desired_outcome}\n\nCreate {okr_count} Objectives, each with 3-5 Key Results.\n\nFor each OKR:\n1. **Objective**: Qualitative, inspiring, actionable\n2. **Key Results**: Quantitative, measurable, time-bound\n3. **Initiatives**: Specific projects that drive KRs\n4. **Confidence Level**: Current % confidence of achieving\n5. **Dependencies**: What needs to be true\n6. **Risks**: What could prevent success\n\nFollow these OKR principles:\n- Objectives are ambitious but achievable (70% target)\n- KRs are outcomes, not outputs\n- KRs have clear numbers and dates\n- Each KR has a baseline and target",
+              "variables": ["context", "period", "focus", "current_state", "desired_outcome", "okr_count"],
+              "customVariables": {
+                "context": {"label": "Team/Company Context", "type": "textarea", "required": true},
+                "period": {"label": "Time Period", "type": "select", "options": ["Q1", "Q2", "Q3", "Q4", "Annual"], "default": "Q1"},
+                "focus": {"label": "Focus Area", "type": "text", "required": true},
+                "current_state": {"label": "Current State", "type": "textarea", "default": ""},
+                "desired_outcome": {"label": "Desired Outcome", "type": "textarea", "required": true},
+                "okr_count": {"label": "Number of Objectives", "type": "select", "options": ["1", "2", "3"], "default": "2"}
+              }
+            },
+            {
+              "id": "swot",
+              "name": "SWOT Analysis",
+              "complexity": "medium",
+              "description": "Strategic SWOT analysis",
+              "template": "Perform SWOT analysis for:\n\n**Subject**: {subject}\n**Industry/Context**: {industry}\n**Time Horizon**: {horizon}\n\n**Known Information**:\n{info}\n\nAnalyze:\n\n**Strengths** (Internal, Positive)\n- What do we do well?\n- What unique resources do we have?\n- What do others see as our strengths?\n\n**Weaknesses** (Internal, Negative)\n- What could we improve?\n- What do we lack?\n- What are others likely to see as weaknesses?\n\n**Opportunities** (External, Positive)\n- What trends could we take advantage of?\n- What opportunities are open to us?\n\n**Threats** (External, Negative)\n- What obstacles do we face?\n- What are competitors doing?\n- What threats could harm us?\n\nThen provide:\n- **SO Strategies**: Use strengths to capitalize on opportunities\n- **WO Strategies**: Overcome weaknesses by pursuing opportunities\n- **ST Strategies**: Use strengths to avoid threats\n- **WT Strategies**: Minimize weaknesses and avoid threats\n\nPrioritize top 3 strategic actions.",
+              "variables": ["subject", "industry", "horizon", "info"],
+              "customVariables": {
+                "subject": {"label": "Subject of Analysis", "type": "text", "required": true},
+                "industry": {"label": "Industry/Context", "type": "text", "default": ""},
+                "horizon": {"label": "Time Horizon", "type": "select", "options": ["6 months", "1 year", "3 years", "5 years"], "default": "1 year"},
+                "info": {"label": "Known Information", "type": "textarea", "default": ""}
+              }
+            },
+            {
+              "id": "business_case",
+              "name": "Business Case",
+              "complexity": "complex",
+              "description": "Build investment business case",
+              "template": "Build a business case for:\n\n**Initiative**: {initiative}\n**Investment Required**: {investment}\n**Timeline**: {timeline}\n**Sponsor**: {sponsor}\n\n**Problem/Opportunity**:\n{problem}\n\n**Proposed Solution**:\n{solution}\n\nCreate business case with:\n1. **Executive Summary**: 1-page overview\n2. **Current State**: Problems, costs, inefficiencies\n3. **Proposed Solution**: What, why, how\n4. **Options Considered**: Why this vs alternatives\n5. **Benefits**:\n   - Quantitative (revenue, cost savings, time)\n   - Qualitative (satisfaction, risk reduction)\n6. **Costs**: Initial, ongoing, hidden\n7. **ROI Analysis**: Payback period, NPV, IRR\n8. **Risk Assessment**: Risks and mitigations\n9. **Implementation Plan**: Phases, milestones\n10. **Resource Requirements**: People, technology\n11. **Success Metrics**: How we'll measure\n12. **Recommendation**: Clear ask with deadline",
+              "variables": ["initiative", "investment", "timeline", "sponsor", "problem", "solution"],
+              "customVariables": {
+                "initiative": {"label": "Initiative Name", "type": "text", "required": true},
+                "investment": {"label": "Investment Required", "type": "text", "required": true},
+                "timeline": {"label": "Timeline", "type": "text", "default": ""},
+                "sponsor": {"label": "Executive Sponsor", "type": "text", "default": ""},
+                "problem": {"label": "Problem/Opportunity", "type": "textarea", "required": true},
+                "solution": {"label": "Proposed Solution", "type": "textarea", "required": true}
+              }
+            }
+          ]
+        },
+        {
+          "id": "presentations",
+          "name": "Presentations",
+          "templates": [
+            {
+              "id": "pitch_deck",
+              "name": "Pitch Deck Outline",
+              "complexity": "complex",
+              "description": "Create startup pitch deck",
+              "template": "Create a pitch deck outline for:\n\n**Company**: {company}\n**Industry**: {industry}\n**Stage**: {stage}\n**Ask**: {ask}\n\n**Description**:\n{description}\n\nCreate slides following {format} format:\n\n1. **Title**: Company name, tagline, logo\n2. **Problem**: Pain point you're solving\n3. **Solution**: Your product/service\n4. **Market**: TAM/SAM/SOM\n5. **Product**: Demo, screenshots, features\n6. **Business Model**: How you make money\n7. **Traction**: Metrics, growth, customers\n8. **Competition**: Landscape, differentiation\n9. **Team**: Founders, key hires, advisors\n10. **Financials**: Revenue, projections\n11. **Ask**: What you need, use of funds\n12. **Vision**: Where you're going\n\nFor each slide:\n- Key message (1 sentence)\n- Bullet points (3-5)\n- Visual suggestion\n- Speaker notes",
+              "variables": ["company", "industry", "stage", "ask", "description", "format"],
+              "customVariables": {
+                "company": {"label": "Company Name", "type": "text", "required": true},
+                "industry": {"label": "Industry", "type": "text", "required": true},
+                "stage": {"label": "Stage", "type": "select", "options": ["Pre-seed", "Seed", "Series A", "Series B+"], "default": "Seed"},
+                "ask": {"label": "Funding Ask", "type": "text", "required": true},
+                "description": {"label": "Company Description", "type": "textarea", "required": true},
+                "format": {"label": "Pitch Format", "type": "select", "options": ["Guy Kawasaki 10/20/30", "Sequoia Format", "YC Format"], "default": "Sequoia Format"}
+              }
+            },
+            {
+              "id": "meeting_agenda",
+              "name": "Meeting Agenda",
+              "complexity": "simple",
+              "description": "Create effective meeting agenda",
+              "template": "Create a meeting agenda:\n\n**Meeting Purpose**: {purpose}\n**Duration**: {duration}\n**Attendees**: {attendees}\n**Meeting Type**: {type}\n\n**Topics to Cover**:\n{topics}\n\n**Desired Outcomes**:\n{outcomes}\n\nGenerate:\n1. **Pre-read Materials**: What attendees should review\n2. **Agenda Items**: With time allocations\n3. **Discussion Questions**: For each topic\n4. **Decision Points**: What needs deciding\n5. **Action Items Template**: For follow-up\n6. **Parking Lot**: For off-topic items\n\nOptimize for:\n- Starting with most important items\n- Leaving buffer time\n- Clear ownership for each item",
+              "variables": ["purpose", "duration", "attendees", "type", "topics", "outcomes"],
+              "customVariables": {
+                "purpose": {"label": "Meeting Purpose", "type": "text", "required": true},
+                "duration": {"label": "Duration", "type": "select", "options": ["30 minutes", "45 minutes", "60 minutes", "90 minutes"], "default": "60 minutes"},
+                "attendees": {"label": "Key Attendees", "type": "text", "default": ""},
+                "type": {"label": "Meeting Type", "type": "select", "options": ["Decision making", "Brainstorming", "Status update", "Planning", "Retrospective"], "default": "Decision making"},
+                "topics": {"label": "Topics to Cover", "type": "textarea", "required": true},
+                "outcomes": {"label": "Desired Outcomes", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "icon": "📧",
+      "topics": [
+        {
+          "id": "email",
+          "name": "Email Writing",
+          "templates": [
+            {
+              "id": "email_professional",
+              "name": "Professional Email",
+              "complexity": "simple",
+              "description": "Write clear professional email",
+              "template": "Write a professional email:\n\n**To**: {recipient}\n**Purpose**: {purpose}\n**Key Message**: {message}\n**Tone**: {tone}\n\nFormat:\n- Clear subject line\n- Greeting\n- Context (1-2 sentences)\n- Main message\n- Clear ask/next steps\n- Professional closing",
+              "variables": ["recipient", "purpose", "message", "tone"],
+              "customVariables": {
+                "recipient": {"label": "Recipient", "type": "text", "required": true},
+                "purpose": {"label": "Email Purpose", "type": "select", "options": ["Request", "Follow-up", "Introduction", "Update", "Thank you", "Apology"], "default": "Request"},
+                "message": {"label": "Key Message", "type": "textarea", "required": true}
+              }
+            },
+            {
+              "id": "email_difficult",
+              "name": "Difficult Conversation Email",
+              "complexity": "complex",
+              "description": "Handle sensitive topics via email",
+              "template": "Help me write a difficult email:\n\n**Situation**: {situation}\n**My Relationship with Recipient**: {relationship}\n**What I Need to Communicate**: {message}\n**My Concerns**: {concerns}\n**Desired Outcome**: {outcome}\n\nHelp me:\n1. **Frame the Issue**: Non-accusatory, factual\n2. **Express Impact**: How this affects me/the work\n3. **Show Understanding**: Acknowledge their perspective\n4. **State Clear Ask**: What I need from them\n5. **Offer Solutions**: Collaborative approach\n6. **Set Next Steps**: Clear timeline\n\nProvide:\n- Main email draft\n- Alternative phrasings for sensitive parts\n- What to avoid saying\n- Possible responses to prepare for",
+              "variables": ["situation", "relationship", "message", "concerns", "outcome"],
+              "customVariables": {
+                "situation": {"label": "Situation Description", "type": "textarea", "required": true},
+                "relationship": {"label": "Your Relationship", "type": "select", "options": ["Direct report", "Manager", "Peer", "Client", "Vendor", "Executive"], "default": "Peer"},
+                "message": {"label": "What You Need to Say", "type": "textarea", "required": true},
+                "concerns": {"label": "Your Concerns", "type": "textarea", "default": ""},
+                "outcome": {"label": "Desired Outcome", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "feedback",
+          "name": "Feedback & Reviews",
+          "templates": [
+            {
+              "id": "feedback_constructive",
+              "name": "Constructive Feedback",
+              "complexity": "medium",
+              "description": "Give effective constructive feedback",
+              "template": "Help me give constructive feedback:\n\n**Person/Team**: {person}\n**Situation**: {situation}\n**Behavior I Observed**: {behavior}\n**Impact**: {impact}\n**My Goal**: {goal}\n\nUse {framework} framework to structure feedback:\n\nProvide:\n1. **Opening**: Set context, show intent to help\n2. **Observation**: Specific, factual behavior\n3. **Impact**: Effect on team/project/them\n4. **Discussion Questions**: To understand their view\n5. **Suggestions**: Actionable improvements\n6. **Support Offer**: How I can help\n7. **Follow-up Plan**: Check-in timeline\n\nTone: {tone}\n\nAlso include:\n- Things to avoid saying\n- How to handle defensive reactions\n- Alternative phrasings",
+              "variables": ["person", "situation", "behavior", "impact", "goal", "framework", "tone"],
+              "customVariables": {
+                "person": {"label": "Who Is Receiving Feedback", "type": "text", "required": true},
+                "situation": {"label": "Situation Context", "type": "textarea", "required": true},
+                "behavior": {"label": "Specific Behavior", "type": "textarea", "required": true},
+                "impact": {"label": "Impact of Behavior", "type": "textarea", "required": true},
+                "goal": {"label": "Your Goal", "type": "textarea", "default": ""},
+                "framework": {"label": "Feedback Framework", "type": "select", "options": ["SBI (Situation-Behavior-Impact)", "COIN (Context-Observation-Impact-Next)", "Radical Candor", "Nonviolent Communication"], "default": "SBI (Situation-Behavior-Impact)"}
+              }
+            },
+            {
+              "id": "performance_review",
+              "name": "Performance Review",
+              "complexity": "complex",
+              "description": "Write comprehensive performance review",
+              "template": "Write a performance review:\n\n**Employee Name**: {name}\n**Role**: {role}\n**Review Period**: {period}\n\n**Key Accomplishments**:\n{accomplishments}\n\n**Areas for Development**:\n{development}\n\n**Goals from Last Period**:\n{goals}\n\n**Rating**: {rating}\n\nCreate review with:\n1. **Summary**: Overall assessment (2-3 sentences)\n2. **Accomplishments**: Detailed with impact\n3. **Strengths**: What they do exceptionally well\n4. **Development Areas**: Constructive, specific\n5. **Goal Achievement**: Status of previous goals\n6. **Future Goals**: SMART goals for next period\n7. **Development Plan**: Growth recommendations\n8. **Recognition**: Specific praise\n9. **Closing**: Encouraging next steps\n\nTone: Balanced, constructive, forward-looking\nFormat: Ready for HR system",
+              "variables": ["name", "role", "period", "accomplishments", "development", "goals", "rating"],
+              "customVariables": {
+                "name": {"label": "Employee Name", "type": "text", "required": true},
+                "role": {"label": "Role/Title", "type": "text", "required": true},
+                "period": {"label": "Review Period", "type": "text", "default": ""},
+                "accomplishments": {"label": "Key Accomplishments", "type": "textarea", "required": true},
+                "development": {"label": "Development Areas", "type": "textarea", "default": ""},
+                "goals": {"label": "Previous Goals", "type": "textarea", "default": ""},
+                "rating": {"label": "Overall Rating", "type": "select", "options": ["Exceeds Expectations", "Meets Expectations", "Needs Improvement"], "default": "Meets Expectations"}
+              }
+            }
+          ]
+        },
+        {
+          "id": "negotiation",
+          "name": "Negotiation",
+          "templates": [
+            {
+              "id": "negotiation_prep",
+              "name": "Negotiation Preparation",
+              "complexity": "complex",
+              "description": "Prepare for important negotiation",
+              "template": "Help me prepare for a negotiation:\n\n**What I'm Negotiating**: {subject}\n**Other Party**: {other_party}\n**My Position**: {my_position}\n**Their Likely Position**: {their_position}\n\n**My Priorities** (ranked):\n{priorities}\n\n**My BATNA**: {batna}\n**My Deadline**: {deadline}\n\nProvide:\n1. **Preparation Checklist**: What to gather before\n2. **ZOPA Analysis**: Zone of possible agreement\n3. **Opening Strategy**: How to start\n4. **Key Arguments**: For my position\n5. **Anticipated Objections**: And responses\n6. **Concession Strategy**: What to give, when\n7. **Questions to Ask**: To understand their interests\n8. **Walk-Away Point**: When to stop\n9. **Anchor Points**: Numbers/terms to anchor on\n10. **Tactics to Watch For**: From their side\n11. **Closing Strategy**: How to seal the deal\n\nScenarios:\n- Best case outcome\n- Realistic outcome\n- Minimum acceptable outcome",
+              "variables": ["subject", "other_party", "my_position", "their_position", "priorities", "batna", "deadline"],
+              "customVariables": {
+                "subject": {"label": "Negotiation Subject", "type": "textarea", "required": true},
+                "other_party": {"label": "Other Party", "type": "text", "required": true},
+                "my_position": {"label": "My Position", "type": "textarea", "required": true},
+                "their_position": {"label": "Their Likely Position", "type": "textarea", "default": ""},
+                "priorities": {"label": "My Priorities (ranked)", "type": "textarea", "required": true},
+                "batna": {"label": "My BATNA (alternative)", "type": "textarea", "default": ""},
+                "deadline": {"label": "My Deadline", "type": "text", "default": ""}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "learning",
+      "name": "Learning & Education",
+      "icon": "📚",
+      "topics": [
+        {
+          "id": "concepts",
+          "name": "Concept Learning",
+          "templates": [
+            {
+              "id": "explain_concept",
+              "name": "Explain Concept",
+              "complexity": "medium",
+              "description": "Deep explanation of any concept",
+              "template": "Explain {concept} to me:\n\n**My Background**: {background}\n**Why I'm Learning This**: {purpose}\n**Depth Level**: {depth}\n\nProvide:\n1. **TL;DR**: One sentence explanation\n2. **ELI5**: Simple analogy/metaphor\n3. **Technical Explanation**: Proper definition\n4. **How It Works**: Step-by-step mechanics\n5. **Key Components**: Breaking it down\n6. **Real Examples**: Concrete applications\n7. **Common Misconceptions**: What people get wrong\n8. **Related Concepts**: What to learn next\n9. **History**: Brief origin story (if relevant)\n10. **Practice Exercise**: To test understanding",
+              "variables": ["concept", "background", "purpose", "depth"],
+              "customVariables": {
+                "concept": {"label": "Concept to Learn", "type": "text", "required": true},
+                "background": {"label": "Your Background", "type": "select", "options": ["Complete beginner", "Some basics", "Intermediate", "Advanced"], "default": "Some basics"},
+                "purpose": {"label": "Why Learning This", "type": "text", "default": ""},
+                "depth": {"label": "Depth Level", "type": "select", "options": ["Overview", "Working knowledge", "Deep understanding", "Expert level"], "default": "Working knowledge"}
+              }
+            },
+            {
+              "id": "compare_concepts",
+              "name": "Compare & Contrast",
+              "complexity": "medium",
+              "description": "Compare two related concepts",
+              "template": "Compare and contrast:\n\n**Concept A**: {concept_a}\n**Concept B**: {concept_b}\n**Context**: {context}\n\nProvide:\n1. **Quick Summary**: One sentence each\n2. **Key Similarities**: What they share\n3. **Key Differences**: Where they diverge\n4. **Comparison Table**: Feature by feature\n5. **When to Use Each**: Decision criteria\n6. **Common Confusions**: Why people mix them up\n7. **Real Examples**: Showing difference in practice\n8. **Trade-offs**: Pros/cons of each\n9. **Can They Coexist?**: When to use both\n10. **Memory Trick**: How to remember the difference",
+              "variables": ["concept_a", "concept_b", "context"],
+              "customVariables": {
+                "concept_a": {"label": "First Concept", "type": "text", "required": true},
+                "concept_b": {"label": "Second Concept", "type": "text", "required": true},
+                "context": {"label": "Context/Field", "type": "text", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "skill_building",
+          "name": "Skill Building",
+          "templates": [
+            {
+              "id": "learning_path",
+              "name": "Learning Path",
+              "complexity": "complex",
+              "description": "Create personalized learning roadmap",
+              "template": "Create a learning path for:\n\n**Skill/Topic**: {skill}\n**My Current Level**: {current_level}\n**Target Level**: {target_level}\n**Time Available**: {time}\n**Learning Style**: {style}\n**Goal**: {goal}\n\nCreate roadmap with:\n1. **Prerequisites**: What I should know first\n2. **Phases**: Logical progression (beginner → intermediate → advanced)\n3. **For Each Phase**:\n   - Key concepts to master\n   - Recommended resources (free and paid)\n   - Hands-on projects\n   - Assessment criteria\n   - Time estimate\n4. **Milestones**: How to know I'm progressing\n5. **Common Pitfalls**: What to avoid\n6. **Practice Schedule**: Weekly study plan\n7. **Community/Support**: Where to get help\n8. **Final Project**: To demonstrate mastery",
+              "variables": ["skill", "current_level", "target_level", "time", "style", "goal"],
+              "customVariables": {
+                "skill": {"label": "Skill to Learn", "type": "text", "required": true},
+                "current_level": {"label": "Current Level", "type": "select", "options": ["Complete beginner", "Beginner", "Intermediate", "Advanced"], "default": "Beginner"},
+                "target_level": {"label": "Target Level", "type": "select", "options": ["Basics", "Competent", "Proficient", "Expert"], "default": "Competent"},
+                "time": {"label": "Time Available", "type": "select", "options": ["2 hours/week", "5 hours/week", "10 hours/week", "Full-time"], "default": "5 hours/week"},
+                "style": {"label": "Learning Style", "type": "select", "options": ["Video courses", "Reading/docs", "Hands-on projects", "Mixed"], "default": "Mixed"},
+                "goal": {"label": "Specific Goal", "type": "textarea", "default": ""}
+              }
+            },
+            {
+              "id": "practice_problems",
+              "name": "Practice Problems",
+              "complexity": "medium",
+              "description": "Generate practice exercises",
+              "template": "Generate practice problems for:\n\n**Topic**: {topic}\n**Difficulty**: {difficulty}\n**Number of Problems**: {count}\n**Focus Area**: {focus}\n\nFor each problem:\n1. **Problem Statement**: Clear description\n2. **Hints**: Progressive hints (optional reveal)\n3. **Solution**: Step-by-step\n4. **Explanation**: Why this approach works\n5. **Common Mistakes**: What to avoid\n6. **Variations**: Related problems to try\n\nProgress from easier to harder.\nInclude mix of: conceptual, calculation, application.",
+              "variables": ["topic", "difficulty", "count", "focus"],
+              "customVariables": {
+                "topic": {"label": "Topic", "type": "text", "required": true},
+                "difficulty": {"label": "Difficulty", "type": "select", "options": ["Easy", "Medium", "Hard", "Mixed"], "default": "Mixed"},
+                "count": {"label": "Number of Problems", "type": "select", "options": ["3", "5", "10", "15"], "default": "5"},
+                "focus": {"label": "Focus Area", "type": "text", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "teaching",
+          "name": "Teaching & Mentoring",
+          "templates": [
+            {
+              "id": "lesson_plan",
+              "name": "Lesson Plan",
+              "complexity": "complex",
+              "description": "Create effective lesson plan",
+              "template": "Create a lesson plan for:\n\n**Topic**: {topic}\n**Audience**: {audience}\n**Duration**: {duration}\n**Prerequisites**: {prerequisites}\n**Learning Objectives**: {objectives}\n\nCreate plan with:\n1. **Opening** (10%): Hook, objectives, preview\n2. **Content Delivery** (50%):\n   - Key concepts (chunked)\n   - Examples for each\n   - Visual aids description\n   - Check-for-understanding moments\n3. **Practice** (30%): Active learning activities\n4. **Closing** (10%): Summary, assessment, next steps\n\nInclude:\n- Transition statements\n- Time markers\n- Materials needed\n- Differentiation strategies\n- Assessment rubric\n- Backup activities (if extra time)",
+              "variables": ["topic", "audience", "duration", "prerequisites", "objectives"],
+              "customVariables": {
+                "topic": {"label": "Lesson Topic", "type": "text", "required": true},
+                "audience": {"label": "Audience", "type": "text", "required": true},
+                "duration": {"label": "Duration", "type": "select", "options": ["30 minutes", "1 hour", "2 hours", "Half-day"], "default": "1 hour"},
+                "prerequisites": {"label": "Prerequisites", "type": "textarea", "default": ""},
+                "objectives": {"label": "Learning Objectives", "type": "textarea", "required": true}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "name": "Creative & Ideas",
+      "icon": "💡",
+      "topics": [
+        {
+          "id": "brainstorming",
+          "name": "Brainstorming",
+          "templates": [
+            {
+              "id": "brainstorm_divergent",
+              "name": "Divergent Thinking",
+              "complexity": "medium",
+              "description": "Generate many diverse ideas",
+              "template": "Help me brainstorm ideas for:\n\n**Challenge**: {challenge}\n**Context**: {context}\n**Constraints**: {constraints}\n\nUse multiple thinking techniques:\n\n1. **Traditional Brainstorm**: 10 straightforward ideas\n2. **SCAMPER**:\n   - Substitute, Combine, Adapt\n   - Modify, Put to other use\n   - Eliminate, Reverse\n3. **Random Input**: Connect to {random_stimulus}\n4. **Reversal**: What if we did opposite?\n5. **Analogy**: How do other industries solve this?\n6. **Worst Ideas**: 3 terrible ideas (then flip them)\n7. **Future Thinking**: What if it's year 2030?\n\nFor promising ideas:\n- Quick feasibility note\n- Estimated impact\n- First step to explore",
+              "variables": ["challenge", "context", "constraints", "random_stimulus"],
+              "customVariables": {
+                "challenge": {"label": "Challenge/Problem", "type": "textarea", "required": true},
+                "context": {"label": "Context", "type": "textarea", "default": ""},
+                "constraints": {"label": "Constraints", "type": "textarea", "default": ""},
+                "random_stimulus": {"label": "Random Stimulus", "type": "text", "default": "nature"}
+              }
+            },
+            {
+              "id": "brainstorm_focused",
+              "name": "Focused Ideation",
+              "complexity": "complex",
+              "description": "Deep dive on specific problem",
+              "template": "Conduct focused ideation session:\n\n**Problem Statement**: {problem}\n**Success Criteria**: {success_criteria}\n**Target User**: {user}\n**Must-Haves**: {must_haves}\n**Budget/Resources**: {resources}\n\nProcess:\n1. **Problem Reframing**: 5 alternative ways to state the problem\n2. **Root Cause Analysis**: Why does this problem exist?\n3. **User Needs Deep Dive**: Jobs-to-be-done analysis\n4. **Idea Generation**: 15-20 potential solutions\n5. **Idea Clustering**: Group by theme\n6. **Impact/Effort Matrix**: Position each cluster\n7. **Top 5 Deep Dive**:\n   - Description\n   - User benefit\n   - Implementation approach\n   - Risks\n   - Quick win version\n8. **Recommendation**: Best path forward with rationale",
+              "variables": ["problem", "success_criteria", "user", "must_haves", "resources"],
+              "customVariables": {
+                "problem": {"label": "Problem Statement", "type": "textarea", "required": true},
+                "success_criteria": {"label": "Success Criteria", "type": "textarea", "required": true},
+                "user": {"label": "Target User", "type": "text", "default": ""},
+                "must_haves": {"label": "Must-Have Requirements", "type": "textarea", "default": ""},
+                "resources": {"label": "Available Resources", "type": "text", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "naming",
+          "name": "Naming & Branding",
+          "templates": [
+            {
+              "id": "name_product",
+              "name": "Product Naming",
+              "complexity": "medium",
+              "description": "Generate product/company names",
+              "template": "Generate names for:\n\n**Product/Company Type**: {type}\n**Industry**: {industry}\n**Target Audience**: {audience}\n**Brand Personality**: {personality}\n**Key Benefits**: {benefits}\n\n**Naming Criteria**:\n- Memorable and easy to pronounce\n- Available as domain (.com preferred)\n- No negative connotations\n- Works globally: {global}\n\nGenerate:\n1. **Descriptive Names**: 5 names that describe function\n2. **Invented Names**: 5 made-up words\n3. **Metaphor Names**: 5 names using symbolism\n4. **Acronyms**: 3 if appropriate\n5. **Compound Words**: 5 combinations\n\nFor top 3 favorites:\n- Meaning/rationale\n- Tagline suggestion\n- Domain availability likelihood\n- Trademark risk assessment\n- Visual/logo direction",
+              "variables": ["type", "industry", "audience", "personality", "benefits", "global"],
+              "customVariables": {
+                "type": {"label": "Product/Company Type", "type": "text", "required": true},
+                "industry": {"label": "Industry", "type": "text", "required": true},
+                "audience": {"label": "Target Audience", "type": "text", "default": ""},
+                "personality": {"label": "Brand Personality", "type": "select", "options": ["Professional", "Playful", "Innovative", "Trustworthy", "Luxurious", "Friendly"], "default": "Professional"},
+                "benefits": {"label": "Key Benefits", "type": "textarea", "default": ""},
+                "global": {"label": "Global Use", "type": "select", "options": ["Yes, must work globally", "Primarily English", "Regional only"], "default": "Yes, must work globally"}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai_prompting",
+      "name": "AI & Prompting",
+      "icon": "🤖",
+      "topics": [
+        {
+          "id": "prompt_engineering",
+          "name": "Prompt Engineering",
+          "templates": [
+            {
+              "id": "improve_prompt",
+              "name": "Improve My Prompt",
+              "complexity": "medium",
+              "description": "Optimize an existing prompt",
+              "template": "Help me improve this prompt:\n\n**Original Prompt**:\n{prompt}\n\n**What I'm Trying to Achieve**:\n{goal}\n\n**Current Problems**:\n{problems}\n\nAnalyze and improve:\n1. **Diagnosis**: What's wrong with current prompt\n2. **Improved Version**: Rewritten prompt\n3. **Explanation**: What changed and why\n4. **Techniques Applied**:\n   - Role/persona setting\n   - Context provision\n   - Constraints and format\n   - Examples (if helpful)\n   - Chain of thought cues\n5. **Variations**: 2 alternative approaches\n6. **Testing Suggestions**: How to verify improvement",
+              "variables": ["prompt", "goal", "problems"],
+              "customVariables": {
+                "prompt": {"label": "Your Current Prompt", "type": "textarea", "required": true},
+                "goal": {"label": "What You're Trying to Achieve", "type": "textarea", "required": true},
+                "problems": {"label": "Current Problems", "type": "textarea", "default": ""}
+              }
+            },
+            {
+              "id": "prompt_from_scratch",
+              "name": "Create Prompt from Scratch",
+              "complexity": "complex",
+              "description": "Build optimal prompt for a task",
+              "template": "Help me create an optimal prompt for:\n\n**Task**: {task}\n**Target AI Model**: {model}\n**Input I'll Provide**: {input}\n**Output I Need**: {output}\n**Quality Criteria**: {criteria}\n\n**Constraints**:\n{constraints}\n\nCreate prompt using best practices:\n1. **Role Definition**: Who should AI pretend to be\n2. **Context Setting**: Background information\n3. **Task Description**: Clear, specific instructions\n4. **Format Specification**: Structure of output\n5. **Examples**: If few-shot learning helps\n6. **Constraints**: Boundaries and limitations\n7. **Quality Cues**: Signals for good output\n\nProvide:\n- Final prompt (ready to use)\n- Variable placeholders marked with {{}}\n- Usage instructions\n- Edge cases to watch for\n- Iteration suggestions",
+              "variables": ["task", "model", "input", "output", "criteria", "constraints"],
+              "customVariables": {
+                "task": {"label": "Task Description", "type": "textarea", "required": true},
+                "model": {"label": "Target AI Model", "type": "select", "options": ["GPT-4", "GPT-3.5", "Claude", "General/Any", "Local LLM"], "default": "General/Any"},
+                "input": {"label": "Input You'll Provide", "type": "textarea", "required": true},
+                "output": {"label": "Output You Need", "type": "textarea", "required": true},
+                "criteria": {"label": "Quality Criteria", "type": "textarea", "default": ""},
+                "constraints": {"label": "Constraints", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "role_play",
+          "name": "Role Play & Personas",
+          "templates": [
+            {
+              "id": "expert_persona",
+              "name": "Expert Persona",
+              "complexity": "simple",
+              "description": "Get expert perspective on topic",
+              "template": "Act as an expert {role} with {years} years of experience in {domain}.\n\n**Your Background**:\n- Worked at: {experience}\n- Specialization: {specialization}\n- Known for: {known_for}\n\n**My Question/Task**:\n{question}\n\nProvide your expert perspective including:\n- Direct answer based on experience\n- Relevant examples from your career\n- Common mistakes you've seen\n- Counterintuitive insights\n- What beginners often miss\n- Resources you'd recommend",
+              "variables": ["role", "years", "domain", "experience", "specialization", "known_for", "question"],
+              "customVariables": {
+                "role": {"label": "Expert Role", "type": "text", "required": true},
+                "years": {"label": "Years of Experience", "type": "select", "options": ["5", "10", "15", "20", "30+"], "default": "15"},
+                "domain": {"label": "Domain", "type": "text", "required": true},
+                "experience": {"label": "Past Experience", "type": "text", "default": "top companies in the field"},
+                "specialization": {"label": "Specialization", "type": "text", "default": ""},
+                "known_for": {"label": "Known For", "type": "text", "default": "practical, actionable advice"},
+                "question": {"label": "Your Question/Task", "type": "textarea", "required": true}
+              }
+            },
+            {
+              "id": "devil_advocate",
+              "name": "Devil's Advocate",
+              "complexity": "medium",
+              "description": "Challenge ideas and find flaws",
+              "template": "Act as a constructive devil's advocate for:\n\n**My Idea/Plan**:\n{idea}\n\n**What I'm Trying to Achieve**:\n{goal}\n\n**I'm Most Confident About**:\n{confident}\n\n**I'm Least Sure About**:\n{uncertain}\n\nChallenge my thinking:\n1. **Assumptions Check**: What am I assuming that might be wrong?\n2. **Blind Spots**: What am I not seeing?\n3. **Failure Modes**: How could this fail?\n4. **Counter-Arguments**: Strongest case against this\n5. **Alternative Perspectives**: How would [skeptic/competitor/critic] view this?\n6. **Stress Test**: Edge cases and extreme scenarios\n7. **Second-Order Effects**: Unintended consequences\n\nThen provide:\n- Overall assessment (strengths vs concerns)\n- Most critical issues to address\n- How to make the idea stronger",
+              "variables": ["idea", "goal", "confident", "uncertain"],
+              "customVariables": {
+                "idea": {"label": "Your Idea/Plan", "type": "textarea", "required": true},
+                "goal": {"label": "Your Goal", "type": "textarea", "required": true},
+                "confident": {"label": "What You're Confident About", "type": "textarea", "default": ""},
+                "uncertain": {"label": "What You're Uncertain About", "type": "textarea", "default": ""}
+              }
+            }
+          ]
+        },
+        {
+          "id": "chain_of_thought",
+          "name": "Reasoning Techniques",
+          "templates": [
+            {
+              "id": "step_by_step",
+              "name": "Step-by-Step Reasoning",
+              "complexity": "medium",
+              "description": "Solve problem with explicit reasoning",
+              "template": "Solve this problem using step-by-step reasoning:\n\n**Problem**:\n{problem}\n\n**Known Information**:\n{known}\n\n**What I Need to Find**:\n{find}\n\nThink through this carefully:\n1. **Understand**: Restate the problem in your own words\n2. **Plan**: Outline your approach before solving\n3. **Execute**: Work through each step explicitly\n4. **Verify**: Check your work\n5. **Conclude**: State the final answer clearly\n\nShow your reasoning at each step. If you're uncertain, explain why.\nIf there are multiple approaches, note them.",
+              "variables": ["problem", "known", "find"],
+              "customVariables": {
+                "problem": {"label": "Problem", "type": "textarea", "required": true},
+                "known": {"label": "Known Information", "type": "textarea", "default": ""},
+                "find": {"label": "What to Find", "type": "textarea", "required": true}
+              }
+            },
+            {
+              "id": "pros_cons_analysis",
+              "name": "Systematic Pros/Cons",
+              "complexity": "medium",
+              "description": "Thorough pros and cons analysis",
+              "template": "Analyze pros and cons systematically:\n\n**Decision/Option**: {option}\n**Context**: {context}\n**My Values/Priorities**: {priorities}\n**Time Horizon**: {horizon}\n\nAnalyze across dimensions:\n1. **Financial**: Costs, revenue, ROI\n2. **Operational**: Effort, complexity, maintenance\n3. **Strategic**: Alignment, opportunities, risks\n4. **People**: Impact on team, stakeholders\n5. **Technical**: Feasibility, scalability, quality\n6. **Timeline**: Speed, dependencies\n\nFor each pro/con:\n- Weight (1-5 importance)\n- Confidence (High/Medium/Low)\n- Mitigation (for cons)\n\nProvide:\n- Weighted summary\n- Recommendation\n- Key factors that could change the analysis",
+              "variables": ["option", "context", "priorities", "horizon"],
+              "customVariables": {
+                "option": {"label": "Decision/Option", "type": "textarea", "required": true},
+                "context": {"label": "Context", "type": "textarea", "default": ""},
+                "priorities": {"label": "Your Priorities", "type": "textarea", "default": ""},
+                "horizon": {"label": "Time Horizon", "type": "select", "options": ["Short-term (< 3 months)", "Medium-term (3-12 months)", "Long-term (> 1 year)"], "default": "Medium-term (3-12 months)"}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

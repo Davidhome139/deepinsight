@@ -1,0 +1,18 @@
+{
+  "browser": "chrome",
+  "launchOptions": {
+    "executablePath": "/usr/bin/chromium-browser",
+    "headless": true,
+    "args": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage"
+    ]
+  },
+  "viewportSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "timeoutNavigation": 60000,
+  "timeoutAction": 5000
+}

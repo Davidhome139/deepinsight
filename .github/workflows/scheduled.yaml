@@ -1,0 +1,195 @@
+name: Scheduled Tasks
+
+on:
+  schedule:
+    # Daily at 2:00 AM UTC
+    - cron: '0 2 * * *'
+    # Weekly on Sunday at 3:00 AM UTC
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+env:
+  GO_VERSION: '1.21'
+  NODE_VERSION: '20'
+
+jobs:
+  # Daily: Dependency vulnerability check
+  daily-security-scan:
+    name: Daily Security Scan
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 2 * * *' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Run Go vulnerability check
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          cd backend && govulncheck ./...
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run npm audit
+        run: |
+          cd frontend && npm audit --audit-level=high || true
+
+  # Daily: Performance benchmarks
+  daily-benchmarks:
+    name: Daily Performance Benchmarks
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 2 * * *' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Run benchmarks
+        run: |
+          cd backend
+          go test -bench=. -benchmem ./... > benchmark-results.txt 2>&1 || true
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results-${{ github.run_number }}
+          path: backend/benchmark-results.txt
+          retention-days: 30
+
+  # Weekly: Database migration validation
+  weekly-migration-check:
+    name: Weekly Migration Validation
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 3 * * 0' || github.event_name == 'workflow_dispatch'
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: yuanbao_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Run migrations
+        env:
+          DATABASE_POSTGRES_HOST: localhost
+          DATABASE_POSTGRES_PORT: 5432
+          DATABASE_POSTGRES_USER: postgres
+          DATABASE_POSTGRES_PASSWORD: password
+          DATABASE_POSTGRES_DBNAME: yuanbao_test
+        run: |
+          cd backend
+          go run cmd/migrate/main.go up || echo "Migration check completed"
+
+  # Weekly: Code quality report
+  weekly-quality-report:
+    name: Weekly Code Quality Report
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 3 * * 0' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Install golangci-lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.54.2
+
+      - name: Run linter
+        run: |
+          cd backend
+          golangci-lint run --out-format=json > lint-report.json || true
+
+      - name: Count issues
+        run: |
+          cd backend
+          echo "## Code Quality Report" >> $GITHUB_STEP_SUMMARY
+          echo "Generated: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Backend Issues" >> $GITHUB_STEP_SUMMARY
+          cat lint-report.json | jq '.Issues | length' >> $GITHUB_STEP_SUMMARY || echo "0" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload lint report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report-${{ github.run_number }}
+          path: backend/lint-report.json
+          retention-days: 30
+
+  # Weekly: Dependency freshness check
+  weekly-dependency-check:
+    name: Weekly Dependency Check
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 3 * * 0' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Check Go module updates
+        run: |
+          cd backend
+          go list -u -m all > go-updates.txt 2>&1 || true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Check npm updates
+        run: |
+          cd frontend
+          npm outdated > npm-updates.txt 2>&1 || true
+
+      - name: Generate summary
+        run: |
+          echo "## Dependency Update Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Go Modules" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat backend/go-updates.txt | head -20 >> $GITHUB_STEP_SUMMARY || echo "No updates available" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### NPM Packages" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat frontend/npm-updates.txt | head -20 >> $GITHUB_STEP_SUMMARY || echo "No updates available" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

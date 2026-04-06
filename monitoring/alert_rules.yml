@@ -1,0 +1,104 @@
+groups:
+  - name: newdoubao-alerts
+    rules:
+      # Service availability
+      - alert: ServiceDown
+        expr: up{job="newdoubao-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Backend service is down"
+          description: "The newDouBao backend service has been down for more than 1 minute."
+
+      # High error rate
+      - alert: HighErrorRate
+        expr: rate(newdoubao_http_requests_total{status=~"5.."}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is above 10% for the last 5 minutes."
+
+      # High response time
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(newdoubao_http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is above 2 seconds."
+
+      # Memory usage
+      - alert: HighMemoryUsage
+        expr: container_memory_usage_bytes{name=~"newdoubao.*"} > 1e9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage"
+          description: "Container memory usage is above 1GB."
+
+      # CPU usage
+      - alert: HighCPUUsage
+        expr: rate(container_cpu_usage_seconds_total{name=~"newdoubao.*"}[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage"
+          description: "Container CPU usage is above 80%."
+
+      # Disk space
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) < 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Low disk space"
+          description: "Available disk space is below 10%."
+
+      # Database health
+      - alert: DatabaseUnhealthy
+        expr: newdoubao_health_status{component="database"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database health check failed"
+          description: "Database has been unhealthy for more than 2 minutes."
+
+      # Redis health
+      - alert: RedisUnhealthy
+        expr: newdoubao_health_status{component="redis"} == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Redis health check failed"
+          description: "Redis has been unhealthy for more than 5 minutes."
+
+  - name: node-alerts
+    rules:
+      # Node down
+      - alert: NodeDown
+        expr: up{job="node-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Node exporter down"
+          description: "Node exporter has been down for more than 1 minute."
+
+      # High load
+      - alert: HighLoad
+        expr: node_load1 > 4
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High system load"
+          description: "System load is above 4 for the last 5 minutes."

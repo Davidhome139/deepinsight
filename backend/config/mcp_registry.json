@@ -1,0 +1,51 @@
+{
+  "mcp_registry": {
+    "version": "1.0.0",
+    "last_updated": "2026-03-28T23:10:00Z",
+    "servers": {
+      "context7": {
+        "name": "context7",
+        "description": "Context7 MCP server for querying documentation",
+        "package_name": "@upstash/context7-mcp",
+        "package_type": "npm",
+        "homepage": "https://github.com/upstash/context7",
+        "repository": "https://github.com/upstash/context7",
+        "install_command": "npm install -g @upstash/context7-mcp",
+        "test_command": "context7-mcp --version",
+        "default_config": {
+          "name": "context7",
+          "enabled": true,
+          "type": "stdio",
+          "command": "context7-mcp",
+          "args": []
+        }
+      },
+      "playwright": {
+        "name": "playwright",
+        "description": "Playwright MCP server for browser automation",
+        "package_name": "playwright",
+        "package_type": "npm",
+        "homepage": "https://github.com/microsoft/playwright",
+        "repository": "https://github.com/microsoft/playwright",
+        "install_command": "npm init playwright@latest",
+        "test_command": "playwright-mcp --version",
+        "default_config": {
+          "name": "playwright",
+          "enabled": true,
+          "type": "stdio",
+          "command": "npx",
+          "args": []
+        }
+      }
+    },
+    "categories": {
+      "documentation": ["context7"],
+      "automation": ["playwright"]
+    },
+    "settings": {
+      "auto_update": true,
+      "check_interval_hours": 24,
+      "notify_on_update": true
+    }
+  }
+}

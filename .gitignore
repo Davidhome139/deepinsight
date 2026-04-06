@@ -1,0 +1,85 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+
+# Build outputs
+dist/
+build/
+*.exe
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+.env.staging
+
+# Sensitive configuration files
+*.env
+backend/config/.env
+frontend/.env
+
+# API keys and secrets
+*.secrets
+*.secret
+keys/
+secrets/
+credentials/
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.truststore
+
+# Database dumps and backups
+*.sql
+*.dump
+*.db
+*.sqlite
+*.sqlite3
+dumps/
+backups/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+postgres_data/
+redis_data/
+
+# Cache
+.cache/
+*.cache
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# SSL certificates (sensitive)
+certs/
+*.pem
+*.key
+*.crt
+
+# Test coverage
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class

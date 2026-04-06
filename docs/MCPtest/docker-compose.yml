@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mcp-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-client
+    # 如果需要网络访问，取消注释以下行
+    # network_mode: "host"
+    # 或者使用桥接网络
+    networks:
+      - mcp-network
+    # 设置环境变量
+    environment:
+      - PLAYWRIGHT_BROWSERS_PATH=/home/pwuser/.cache/ms-playwright
+      - PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=0
+    # 如果需要持久化日志或数据，可以挂载卷
+    # volumes:
+    #   - ./logs:/app/logs
+    #   - ./data:/app/data
+    # 如果需要访问主机网络（用于浏览器自动化）
+    # network_mode: "host"
+    # 或者使用特权模式（如果需要访问系统资源）
+    # privileged: true
+    # 设置资源限制
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+    # 重启策略
+    restart: unless-stopped
+
+networks:
+  mcp-network:
+    driver: bridge

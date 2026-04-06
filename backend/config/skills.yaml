@@ -1,0 +1,46 @@
+# Skills Configuration
+# See: https://github.com/timescale/tiger-skills-mcp-server
+
+# Local skills collection
+# Each skill should be in its own subdirectory with a SKILL.md file
+local-skills:
+  type: local_collection
+  path: ./skills
+
+# Individual local skills (examples)
+# custom-skill:
+#   type: local
+#   path: ./skills/custom-skill-name
+
+# GitHub skill collections
+anthropic-skills:
+  type: github_collection
+  repo: anthropics/skills
+  # Optional: ignore specific paths or skills
+  # ignored_paths:
+  #   - .claude-plugin
+  # disabled_skills:
+  #   - canvas-design
+  # Or only enable specific skills:
+  # enabled_skills:
+  #   - frontend-design
+  #   - webapp-testing
+
+# Claude Cookbooks skills
+claude-cookbooks:
+  type: github_collection
+  repo: anthropics/claude-cookbooks
+  path: ./skills/custom_skills
+
+# Individual GitHub skill example
+# skill-creator:
+#   type: github
+#   repo: anthropics/skills
+#   path: skill-creator/SKILL.md
+
+# Settings
+settings:
+  # Cache TTL in milliseconds (default: 5 minutes)
+  ttl: 300000
+  # Enable subagent task execution
+  subagent_enabled: true

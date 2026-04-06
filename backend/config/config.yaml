@@ -1,0 +1,40 @@
+cache:
+    ttl:
+        conversation: 300
+        session: 3600
+        user_settings: 1800
+database:
+    postgres:
+        host: db
+        port: 5432
+        user: postgres
+        password: ""
+        dbname: yuanbao
+        sslmode: disable
+        maxconnections: 0
+    redis:
+        host: redis
+        port: 6379
+        password: ""
+        db: 0
+jwt:
+    secret: ""
+os: windows
+server:
+    port: 8080
+    mode: debug
+    corsorigins: []
+    https:
+        enabled: false
+        port: 8443
+        cert_file: certs/localhost.crt
+        key_file: certs/localhost.key
+storage:
+    uploaddir: ""
+    maxsize: 0
+    allowedtypes: []
+tools:
+    playwright:
+        default_urls:
+            - "https://www.baidu.com"
+            - "https://en.wikipedia.org"

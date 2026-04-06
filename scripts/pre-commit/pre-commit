@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+HOOK_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+REPO_ROOT=$(cd "$HOOK_DIR/../.." && pwd)
+
+echo "🔍 Running pre-commit checks..."
+
+cd "$REPO_ROOT"
+
+if ! python3 --version >/dev/null 2>&1; then
+    echo "❌ Python 3 is not installed or not in PATH"
+    exit 1
+fi
+
+python3 scripts/pre-commit/detect-secrets.py --staged
+DETECT_EXIT=$?
+
+if [ $DETECT_EXIT -ne 0 ]; then
+    echo "❌ Pre-commit checks failed. Please fix the issues before committing."
+    exit 1
+fi
+
+echo "✅ All pre-commit checks passed!"
+exit 0

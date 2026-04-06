@@ -1,0 +1,81 @@
+{
+  "mcpservers": {
+    "brave-search": {
+      "allowedpaths": [],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "command": "npx",
+      "enabled": false,
+      "name": "Brave Search (搜索引擎)",
+      "server_type": "command",
+      "type": "command"
+    },
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "automationinfo": {
+        "autoinstall": true,
+        "autoupdate": true,
+        "installscript": "npm install -g @upstash/context7-mcp",
+        "installstatus": "installed",
+        "packagemanager": "npm",
+        "packagename": "@upstash/context7-mcp",
+        "updatestatus": "pending"
+      },
+      "command": "npx",
+      "connected": false,
+      "enabled": true,
+      "env": {
+        "CONTEXT7_API_KEY": "ctx7sk-50c0a67f-bee4-4a40-8028-82fd726ab7e2"
+      },
+      "name": "Context7 (上下文管理)",
+      "server_type": "command",
+      "type": "command"
+    },
+    "playwright": {
+      "allowedpaths": [],
+      "args": [],
+      "automationinfo": {
+        "autoinstall": true,
+        "autoupdate": true,
+        "installscript": "npm install -g @playwright/mcp@latest",
+        "installstatus": "installed",
+        "packagemanager": "npm",
+        "packagename": "@playwright/mcp",
+        "updatestatus": "pending"
+      },
+      "command": "playwright-mcp",
+      "enabled": true,
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "/home/pwuser/.cache/ms-playwright",
+        "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "0",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH": "/opt/google/chrome/chrome",
+        "DISPLAY": ":99",
+        "PLAYWRIGHT_BROWSER": "chrome"
+      },
+      "fromgalleryid": null,
+      "name": "Playwright (浏览器自动化)",
+      "type": "command"
+    },
+    "puppeteer": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "command": "npx",
+      "connected": false,
+      "enabled": false,
+      "name": "Puppeteer (浏览器控制)",
+      "type": ""
+    }
+  },
+  "settings": {
+    "autodiscover": false,
+    "maxtools": 0,
+    "timeout": 60
+  }
+}
