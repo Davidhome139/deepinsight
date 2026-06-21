@@ -14,7 +14,7 @@ RUN go mod tidy
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s" -o main cmd/main.go
 
 # 使用微软官方 Playwright Docker 镜像
-FROM mcr.microsoft.com/playwright:v1.48.0-noble
+FROM mcr.microsoft.com/playwright:v1.61.0-noble
 
 WORKDIR /app
 COPY --from=builder /app/main .
